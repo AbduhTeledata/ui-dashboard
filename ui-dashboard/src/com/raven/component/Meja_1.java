@@ -763,6 +763,7 @@ public class Meja_1 extends javax.swing.JPanel implements ActionListener{
     public void itemStateChange(ItemEvent e){
         System.out.println(jComboBoxCust.getSelectedItem());
     }
+    
     public void lossTimer(){
         Integer biayapermenit = 550;
         Thread th = new Thread(){
@@ -881,7 +882,7 @@ public class Meja_1 extends javax.swing.JPanel implements ActionListener{
             try {
                 String url = "jdbc:mysql://localhost:3306/infotama_pool_cafe";
                 String user = "root";
-                String pass = "@Hazlam2020";
+                String pass = "@Hazlam2024";
                 DriverManager.registerDriver(new com.mysql.cj.jdbc.Driver());
                 connection = (Connection) DriverManager.getConnection(url, user, pass);
                 //connection = koneksi.getConnection();
