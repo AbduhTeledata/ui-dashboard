@@ -538,7 +538,7 @@ public class Meja_9 extends javax.swing.JPanel implements ActionListener{
                                 menit = 59;
                                 menit--;
                                 ddMenit = ddFormat.format(menit);
-                                sisaMinute.setText(" : " + ddMenit);
+                                sisaMinute.setText(ddMenit + " : ");
                                 jam--;
                                 ddJam = ddFormat.format(jam);
                                 sisaHour.setText(ddJam + " : ");
@@ -898,6 +898,39 @@ public class Meja_9 extends javax.swing.JPanel implements ActionListener{
         }
     }
     
+    public void updateTransaksi(){
+        String no_meja = jNomorMeja.getText();
+        String jamMulai = dateTime.getText();
+        String jamSelesai = jLabelSelesai.getText();
+        String totalBiaya = jLabelBiaya.getText();
+        String durasi = jSpinnerHour.getValue().toString() + ":" + jSpinnerMinute.getValue().toString();
+        //durasi = (int) jSpinnerHour.getValue();
+        String member = jComboBoxCust.getSelectedItem().toString();
+        String diskon = jTextFieldDiskon.getText();
+        String statusOrder = "0";
+        String statusBayar = "Lunas";
+        String tanggalOrder = jLabelTanggal.getText();
+        
+        if (connection == null){
+            try {
+                String url = "jdbc:mysql://localhost:3306/infotama_pool_cafe";
+                String user = "root";
+                String pass = "@Hazlam2024";
+                DriverManager.registerDriver(new com.mysql.cj.jdbc.Driver());
+                connection = (Connection) DriverManager.getConnection(url, user, pass);
+                //connection = koneksi.getConnection();
+                Statement st = connection.createStatement();
+                String sql = "INSERT INTO transaksi(no_meja,jam_mulai,jam_selesai,total_biaya,durasi,member,diskon,status_order,status_bayar,tanggal_order) " +
+                             "VALUES ('"+no_meja+"','"+jamMulai+"','"+jamSelesai+"','"+totalBiaya+"','"+durasi+"','"+member+"','"+diskon+"','"+statusOrder+"','"+statusBayar+"','"+tanggalOrder+"')";
+
+                st.execute(sql);
+                JOptionPane.showMessageDialog(null, "Data transaksi berhasil ditambahkan");
+
+                } catch (Exception e) {
+                 JOptionPane.showMessageDialog(null, "Gagal tambah data transaksi");
+            }     
+        }
+    }
     
     @Override
     public void actionPerformed(ActionEvent e){
