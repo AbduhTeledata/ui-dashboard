@@ -1144,7 +1144,7 @@ public class Meja_1 extends javax.swing.JPanel implements ActionListener{
             try {
                 String url = "jdbc:mysql://localhost:3306/infotama_pool_cafe";
                 String user = "root";
-                String pass = "abduh";
+                String pass = "@Hazlam2024";
                 DriverManager.registerDriver(new com.mysql.cj.jdbc.Driver());
                 connection = (Connection) DriverManager.getConnection(url, user, pass);
                 //connection = koneksi.getConnection();
@@ -1203,7 +1203,7 @@ public class Meja_1 extends javax.swing.JPanel implements ActionListener{
             try {
                 String url = "jdbc:mysql://localhost:3306/infotama_pool_cafe";
                 String user = "root";
-                String pass = "abduh";
+                String pass = "@Hazlam2024";
                 DriverManager.registerDriver(new com.mysql.cj.jdbc.Driver());
                 connection = (Connection) DriverManager.getConnection(url, user, pass);
                 //connection = koneksi.getConnection();
@@ -1231,7 +1231,7 @@ public class Meja_1 extends javax.swing.JPanel implements ActionListener{
             try {
                 String url = "jdbc:mysql://localhost:3306/infotama_pool_cafe";
                 String user = "root";
-                String pass = "abduh";
+                String pass = "@Hazlam2024";
                 DriverManager.registerDriver(new com.mysql.cj.jdbc.Driver());
                 connection = (Connection) DriverManager.getConnection(url, user, pass);
                 //connection = koneksi.getConnection();
@@ -1257,7 +1257,7 @@ public class Meja_1 extends javax.swing.JPanel implements ActionListener{
             try {
                 String url = "jdbc:mysql://localhost:3306/infotama_pool_cafe";
                 String user = "root";
-                String pass = "abduh";
+                String pass = "@Hazlam2024";
                 DriverManager.registerDriver(new com.mysql.cj.jdbc.Driver());
                 connection = (Connection) DriverManager.getConnection(url, user, pass);
                 //connection = koneksi.getConnection();
@@ -1282,7 +1282,7 @@ public class Meja_1 extends javax.swing.JPanel implements ActionListener{
             try {
                 String url = "jdbc:mysql://localhost:3306/infotama_pool_cafe";
                 String user = "root";
-                String pass = "abduh";
+                String pass = "@Hazlam2024";
                 DriverManager.registerDriver(new com.mysql.cj.jdbc.Driver());
                 connection = (Connection) DriverManager.getConnection(url, user, pass);
                 //connection = koneksi.getConnection();
@@ -1321,7 +1321,7 @@ public class Meja_1 extends javax.swing.JPanel implements ActionListener{
             try {
                 String url = "jdbc:mysql://localhost:3306/infotama_pool_cafe";
                 String user = "root";
-                String pass = "abduh";
+                String pass = "@Hazlam2024";
                 DriverManager.registerDriver(new com.mysql.cj.jdbc.Driver());
                 connection = (Connection) DriverManager.getConnection(url, user, pass);
                 //connection = koneksi.getConnection();

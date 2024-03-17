@@ -8,7 +8,7 @@ public class SingletonConnection {
     private final String SERVER = "localhost:3306";
     private final String DB = "infotama_pool_cafe";
     private final String USER = "root";
-    private final String PASS = "abduh";
+    private final String PASS = "@Hazlam2024";
     private Connection con;
     
     private static SingletonConnection instance = null;
