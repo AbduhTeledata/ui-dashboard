@@ -17,7 +17,7 @@
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
-              <EmptySpace max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <Component id="meja_11" min="-2" pref="328" max="-2" attributes="0"/>
@@ -29,16 +29,12 @@
                       <Component id="meja_41" min="-2" pref="328" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="meja_51" alignment="0" min="-2" pref="328" max="-2" attributes="0"/>
-                          <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="6" pref="6" max="-2" attributes="0"/>
-                              <Component id="meja_91" min="-2" pref="328" max="-2" attributes="0"/>
-                          </Group>
+                      <Group type="103" groupAlignment="1" attributes="0">
+                          <Component id="meja_51" min="-2" pref="328" max="-2" attributes="0"/>
+                          <Component id="meja_91" min="-2" pref="328" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="meja_101" min="-2" pref="328" max="-2" attributes="0"/>
                           <Group type="102" attributes="0">
                               <Component id="meja_61" min="-2" pref="328" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
@@ -46,10 +42,11 @@
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="meja_81" min="-2" pref="328" max="-2" attributes="0"/>
                           </Group>
+                          <Component id="meja_101" min="-2" pref="328" max="-2" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
-              <EmptySpace max="32767" attributes="0"/>
+              <EmptySpace pref="12" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
