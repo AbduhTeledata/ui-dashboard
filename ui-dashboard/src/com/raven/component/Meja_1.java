@@ -1,7 +1,6 @@
 package com.raven.component;
 
 import com.raven.connection.koneksi;
-import com.raven.main.Menu_Utama;
 import com.raven.model.Model_Card;
 import java.awt.Color;
 import java.awt.GradientPaint;
@@ -11,6 +10,15 @@ import java.awt.RenderingHints;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
+import java.io.DataInputStream;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.net.DatagramPacket;
+import java.net.DatagramSocket;
+import java.net.Inet4Address;
+import java.net.InetAddress;
+import java.net.Socket;
+import java.net.UnknownHostException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -48,6 +56,8 @@ public class Meja_1 extends javax.swing.JPanel implements ActionListener{
     static int menitBiaya = 0;
     static int biayaTotal = 0;
     
+    int counter1 = 1, counter2 = 1, counter3 = 3;
+    
     static boolean state = true;
     
     public Connection connection;
@@ -57,6 +67,7 @@ public class Meja_1 extends javax.swing.JPanel implements ActionListener{
     DecimalFormat ddFormat = new DecimalFormat("00");
     
     Timer timer;
+    private Connection conn;
     
     public Color getColor1() {
         return color1;
@@ -83,6 +94,10 @@ public class Meja_1 extends javax.swing.JPanel implements ActionListener{
         setOpaque(false);
         color1 = Color.BLACK;
         color2 = Color.WHITE;
+        jButtonRefresh.addActionListener(this);
+        jButtonStart.addActionListener(this);
+        jButtonLanjutkan.addActionListener(this);
+        //getDataBiaya();
     }
 
     public void setData(Model_Card data) {
@@ -98,7 +113,7 @@ public class Meja_1 extends javax.swing.JPanel implements ActionListener{
     }
     
     public void curDate(){
-        DateTimeFormatter dtt = DateTimeFormatter.ofPattern("YYY-MM-dd");
+        DateTimeFormatter dtt = DateTimeFormatter.ofPattern("dd-MM-YYY");
         LocalDateTime now = LocalDateTime.now(); 
         jLabelTanggal.setText(dtt.format(now));
     }
@@ -142,6 +157,7 @@ public class Meja_1 extends javax.swing.JPanel implements ActionListener{
         jLabelSelesai = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jLabelTanggal = new javax.swing.JLabel();
+        jLabel_idorder = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(204, 204, 204));
 
@@ -196,7 +212,7 @@ public class Meja_1 extends javax.swing.JPanel implements ActionListener{
             }
         });
 
-        jComboBoxCust.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Paket", "Reguler", "Free Reguler", "Loss Reguler" }));
+        jComboBoxCust.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Reguler", "Paket", "Free", "Loss", "Member" }));
         jComboBoxCust.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBoxCustActionPerformed(evt);
@@ -260,11 +276,11 @@ public class Meja_1 extends javax.swing.JPanel implements ActionListener{
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
         jLabel7.setText("Sisa     :");
 
-        jLabel8.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
+        jLabel8.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel8.setText("Biaya   :");
+        jLabel8.setText("Biaya:");
 
-        jLabelBiaya.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
+        jLabelBiaya.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
         jLabelBiaya.setForeground(new java.awt.Color(255, 255, 255));
         jLabelBiaya.setText("0");
 
@@ -387,13 +403,15 @@ public class Meja_1 extends javax.swing.JPanel implements ActionListener{
         jLabelTanggal.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
         jLabelTanggal.setForeground(new java.awt.Color(255, 255, 255));
 
+        jLabel_idorder.setText("id order");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addComponent(jButtonStart)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -408,8 +426,12 @@ public class Meja_1 extends javax.swing.JPanel implements ActionListener{
                         .addComponent(jSpinnerMinute, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel4)
-                            .addComponent(jSpinnerSecond, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(jSpinnerSecond, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel4)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel_idorder)
+                                .addGap(13, 13, 13)))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addGap(5, 5, 5)
@@ -445,12 +467,6 @@ public class Meja_1 extends javax.swing.JPanel implements ActionListener{
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabelTanggal)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jPanelDurasi, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel4))
-                    .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(lbTitle)
@@ -466,40 +482,50 @@ public class Meja_1 extends javax.swing.JPanel implements ActionListener{
                         .addComponent(lbValues4)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel2))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jLabel3)
+                                .addComponent(jLabel4))
+                            .addComponent(jLabel2)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabelTanggal)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jSpinnerHour, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jSpinnerMinute, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jSpinnerSecond, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jPanelDurasi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButtonStart)
-                            .addComponent(jButtonPause)
-                            .addComponent(jButtonLanjutkan)
-                            .addComponent(jButtonRefresh))))
+                        .addComponent(jLabel_idorder)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jSpinnerHour, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jSpinnerMinute, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jSpinnerSecond, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButtonStart)
+                    .addComponent(jButtonPause)
+                    .addComponent(jButtonLanjutkan)
+                    .addComponent(jButtonRefresh))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanelDurasi.setBackground(Color.GRAY);
         jLabelTanggal.setVisible(false);
+        jLabel_idorder.setVisible(false);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonStartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonStartActionPerformed
+        
         state = true;
         detik = (int) jSpinnerSecond.getValue();
         menit = (int) jSpinnerMinute.getValue();
         jam = (int) jSpinnerHour.getValue();
-        Integer lossReguler = jComboBoxCust.getSelectedIndex();
-        Integer biayapermenit = 550;
+        String lossReguler = jComboBoxCust.getSelectedItem().toString();
         
-        Thread t = new Thread(){
-            
+        
+        //Integer biayapermenit = (int) biayamenit;
+        Thread t = new Thread(){ 
             public void run(){
-                
-                for(;;){
-                    if(state==true){
+                if ("Reguler".equals(lossReguler)) {
+                    for(;;){
+                        if(state==true){
                         try{
                             sleep(1);
                             milliseconds++;
@@ -544,7 +570,10 @@ public class Meja_1 extends javax.swing.JPanel implements ActionListener{
                                 sisaHour.setText(ddJam + " : ");
                             }
                             if( jam == 0 && menit <= 5){
-                               jPanelDurasi.setBackground(Color.RED);   
+                               jPanelDurasi.setBackground(Color.RED); 
+                               updateTransaksi5m();
+                               onOffLampu5m();
+
                              }
                             if(seconds == (int) jSpinnerSecond.getValue()  && minutes == (int) jSpinnerMinute.getValue() && hours == (int) jSpinnerHour.getValue()){
                                 state = false;
@@ -558,6 +587,9 @@ public class Meja_1 extends javax.swing.JPanel implements ActionListener{
                                 jSpinnerHour.setValue(0);
                                 jSpinnerMinute.setValue(0);
                                 jSpinnerMinute.setValue(0);
+                                updateTransaksi();
+                                offLampu();
+
                             }
                             if(jam == 0 && menit == 00){
                                 state = false;
@@ -573,61 +605,316 @@ public class Meja_1 extends javax.swing.JPanel implements ActionListener{
                                 jSpinnerMinute.setValue(0);
                             }
                             
-                            
-                           
-                            //sisaSecond.setText(" : " + ddDetik);
                         }
                         catch(Exception e){  
                         }
                     }
-//                    if (lossReguler == 3) {
-//                        for (;;) {
-//                            if (state = true) {
-//                                try {
-//                                    sleep(1);
-//                                    milliseconds++;
-//                                    durasiMillisecond.setText(" : "+milliseconds);
-//                                    jPanelDurasi.setBackground(Color.BLUE);
-//                                    if(milliseconds > 1000){
-//                                        milliseconds = 0;
-//                                        seconds++;
-//                                        ddSecond = ddFormat.format(seconds);
-//                                         durasiSecond.setText(ddSecond);
-//                                        detik--;
-//                                        ddDetik = ddFormat.format(detik);
-//                                    }
-//                                    if(seconds > 60){
-//                                        milliseconds = 0;
-//                                        seconds = 0;
-//                                        minutes++;
-//                                        ddMinute = ddFormat.format(minutes);
-//                                        durasiMinute.setText(ddMinute + " : ");
-//                                        biayaTotal = minutes * biayapermenit;
-//                                        jLabelBiaya.setText(Integer.toString(biayaTotal));
-//                                    }
-//                                    if(minutes > 60){
-//                                        milliseconds = 0;
-//                                        seconds = 0;
-//                                        minutes = 0;
-//                                        hours++;
-//                                        ddHour = ddFormat.format(hours);
-//                                        durasiHour.setText(""+ ddHour);
-//                                        
-//                                        //menit = 60;
-//                                    }
-//                                   
-//                                } catch (Exception e) {
-//                                }
-//                            }
-//                            
-//                        }
-//                                
-//                    }
-                    else{
-                        break;
                     }
                 }
-                
+                if ("Paket".equals(lossReguler)) {
+                    for(;;){
+                        if(state==true){
+                        try{
+                            sleep(1);
+                            milliseconds++;
+                            durasiMillisecond.setText(" : "+milliseconds);
+                            if(milliseconds > 1000){
+                                milliseconds = 0;
+                                seconds++;
+                                ddSecond = ddFormat.format(seconds);
+                                durasiSecond.setText(ddSecond);
+                                detik--;
+                                ddDetik = ddFormat.format(detik);
+                            }
+                            if(seconds > 60){
+                                milliseconds = 0;
+                                seconds = 0;
+                                minutes++;
+                                ddMinute = ddFormat.format(minutes);
+                                durasiMinute.setText(ddMinute + " : ");
+                                menit--;
+                                ddMenit = ddFormat.format(menit);
+                                sisaMinute.setText(ddMenit + " : ");
+                            }
+                            if(minutes > 60){
+                                milliseconds = 0;
+                                seconds = 0;
+                                minutes = 0;
+                                hours++;
+                                ddHour = ddFormat.format(hours);
+                                durasiHour.setText(""+ ddHour);
+                                jam--;
+                                ddJam = ddFormat.format(jam);
+                                sisaHour.setText(ddJam);
+                                //menit = 60;
+                            }
+                            if(menit == -1){
+                                menit = 59;
+                                menit--;
+                                ddMenit = ddFormat.format(menit);
+                                sisaMinute.setText(" : " + ddMenit);
+                                jam--;
+                                ddJam = ddFormat.format(jam);
+                                sisaHour.setText(ddJam + " : ");
+                            }
+                            if( jam == 0 && menit <= 5){
+                               jPanelDurasi.setBackground(Color.RED); 
+                               updateTransaksi5m();
+                               onOffLampu5m();
+                             }
+                            if(seconds == (int) jSpinnerSecond.getValue()  && minutes == (int) jSpinnerMinute.getValue() && hours == (int) jSpinnerHour.getValue()){
+                                state = false;
+                                jPanelDurasi.setBackground(Color.GRAY);
+                                jButtonStart.setEnabled(true);
+                                jSpinnerHour.setEnabled(true);
+                                jSpinnerMinute.setEnabled(true);
+                                jSpinnerSecond.setEnabled(true);
+                                jComboBoxCust.setEnabled(true);
+                                jTextFieldDiskon.setEditable(true);
+                                jSpinnerHour.setValue(0);
+                                jSpinnerMinute.setValue(0);
+                                jSpinnerMinute.setValue(0);
+                                updateTransaksi();
+                                offLampu();
+                            }
+                            if(jam == 0 && menit == 00){
+                                state = false;
+                                jPanelDurasi.setBackground(Color.GRAY);
+                                jButtonStart.setEnabled(true);
+                                jSpinnerHour.setEnabled(true);
+                                jSpinnerMinute.setEnabled(true);
+                                jSpinnerSecond.setEnabled(true);
+                                jComboBoxCust.setEnabled(true);
+                                jTextFieldDiskon.setEditable(true);
+                                jSpinnerHour.setValue(0);
+                                jSpinnerMinute.setValue(0);
+                                jSpinnerMinute.setValue(0);
+                                updateTransaksi();
+                            }
+                            
+                        }
+                        catch(Exception e){  
+                        }
+                    }
+                    }
+                }
+                if ("Free".equals(lossReguler)) {
+                    for(;;){
+                        if(state==true){
+                        try{
+                            sleep(1);
+                            milliseconds++;
+                            durasiMillisecond.setText(" : "+milliseconds);
+                            if(milliseconds > 1000){
+                                milliseconds = 0;
+                                seconds++;
+                                ddSecond = ddFormat.format(seconds);
+                                durasiSecond.setText(ddSecond);
+                                detik--;
+                                ddDetik = ddFormat.format(detik);
+                            }
+                            if(seconds > 60){
+                                milliseconds = 0;
+                                seconds = 0;
+                                minutes++;
+                                ddMinute = ddFormat.format(minutes);
+                                durasiMinute.setText(ddMinute + " : ");
+                                menit--;
+                                ddMenit = ddFormat.format(menit);
+                                sisaMinute.setText(ddMenit + " : ");
+                            }
+                            if(minutes > 60){
+                                milliseconds = 0;
+                                seconds = 0;
+                                minutes = 0;
+                                hours++;
+                                ddHour = ddFormat.format(hours);
+                                durasiHour.setText(""+ ddHour);
+                                jam--;
+                                ddJam = ddFormat.format(jam);
+                                sisaHour.setText(ddJam);
+                                //menit = 60;
+                            }
+                            if(menit == -1){
+                                menit = 59;
+                                menit--;
+                                ddMenit = ddFormat.format(menit);
+                                sisaMinute.setText(" : " + ddMenit);
+                                jam--;
+                                ddJam = ddFormat.format(jam);
+                                sisaHour.setText(ddJam + " : ");
+                            }
+                            if( jam == 0 && menit <= 5){
+                               jPanelDurasi.setBackground(Color.RED); 
+                               updateTransaksi5m();
+                               onOffLampu5m();
+                             }
+                            if(seconds == (int) jSpinnerSecond.getValue()  && minutes == (int) jSpinnerMinute.getValue() && hours == (int) jSpinnerHour.getValue()){
+                                state = false;
+                                jPanelDurasi.setBackground(Color.GRAY);
+                                jButtonStart.setEnabled(true);
+                                jSpinnerHour.setEnabled(true);
+                                jSpinnerMinute.setEnabled(true);
+                                jSpinnerSecond.setEnabled(true);
+                                jComboBoxCust.setEnabled(true);
+                                jTextFieldDiskon.setEditable(true);
+                                jSpinnerHour.setValue(0);
+                                jSpinnerMinute.setValue(0);
+                                jSpinnerMinute.setValue(0);
+                                updateTransaksi();
+                                offLampu();
+                            }
+                            if(jam == 0 && menit == 00){
+                                state = false;
+                                jPanelDurasi.setBackground(Color.GRAY);
+                                jButtonStart.setEnabled(true);
+                                jSpinnerHour.setEnabled(true);
+                                jSpinnerMinute.setEnabled(true);
+                                jSpinnerSecond.setEnabled(true);
+                                jComboBoxCust.setEnabled(true);
+                                jTextFieldDiskon.setEditable(true);
+                                jSpinnerHour.setValue(0);
+                                jSpinnerMinute.setValue(0);
+                                jSpinnerMinute.setValue(0);
+                            }
+                            
+                        }
+                        catch(Exception e){  
+                        }
+                        }
+                    }
+                }
+                if ("Loss".equals(lossReguler)) {
+                    jSpinnerHour.setEnabled(false);
+                    jSpinnerMinute.setEnabled(false);
+                    jSpinnerSecond.setEnabled(false);
+                    Double biayapermenit = Double.parseDouble(jLabelBiaya.getText());
+                    DecimalFormat f = new DecimalFormat("#,##0.##");
+                    for (;;) {
+                        if (state == true) {
+                            try {
+                                sleep(1);
+                                milliseconds++;
+                                durasiMillisecond.setText(" : "+milliseconds);
+                                if(milliseconds > 1000){
+                                        milliseconds = 0;
+                                        seconds++;
+                                        ddSecond = ddFormat.format(seconds);
+                                        durasiSecond.setText(ddSecond);    
+                                    }
+                                if(seconds > 60){
+                                        milliseconds = 0;
+                                        seconds = 0;
+                                        minutes++;
+                                        ddMinute = ddFormat.format(minutes);
+                                        durasiMinute.setText(ddMinute + " : ");
+                                        biayaTotal = (int) (minutes * biayapermenit);
+                                        jLabelBiaya.setText(f.format(biayaTotal));
+                                    }
+                                if(minutes > 60){
+                                        milliseconds = 0;
+                                        seconds = 0;
+                                        minutes = 0;
+                                        hours++;
+                                        ddHour = ddFormat.format(hours);
+                                        durasiHour.setText(""+ ddHour); 
+                                    }
+                                   
+                                } 
+                            catch (Exception e) {
+                             }
+                            }
+                            
+                        }
+                                
+                }
+                if ("Member".equals(lossReguler)) {
+                    for(;;){
+                        if(state==true){
+                        try{
+                            sleep(1);
+                            milliseconds++;
+                            durasiMillisecond.setText(" : "+milliseconds);
+                            if(milliseconds > 1000){
+                                milliseconds = 0;
+                                seconds++;
+                                ddSecond = ddFormat.format(seconds);
+                                durasiSecond.setText(ddSecond);
+                                detik--;
+                                ddDetik = ddFormat.format(detik);
+                            }
+                            if(seconds > 60){
+                                milliseconds = 0;
+                                seconds = 0;
+                                minutes++;
+                                ddMinute = ddFormat.format(minutes);
+                                durasiMinute.setText(ddMinute + " : ");
+                                menit--;
+                                ddMenit = ddFormat.format(menit);
+                                sisaMinute.setText(ddMenit + " : ");
+                            }
+                            if(minutes > 60){
+                                milliseconds = 0;
+                                seconds = 0;
+                                minutes = 0;
+                                hours++;
+                                ddHour = ddFormat.format(hours);
+                                durasiHour.setText(""+ ddHour);
+                                jam--;
+                                ddJam = ddFormat.format(jam);
+                                sisaHour.setText(ddJam);
+                                //menit = 60;
+                            }
+                            if(menit == -1){
+                                menit = 59;
+                                menit--;
+                                ddMenit = ddFormat.format(menit);
+                                sisaMinute.setText(" : " + ddMenit);
+                                jam--;
+                                ddJam = ddFormat.format(jam);
+                                sisaHour.setText(ddJam + " : ");
+                            }
+                            if( jam == 0 && menit <= 5){
+                               jPanelDurasi.setBackground(Color.RED); 
+                               updateTransaksi5m();
+                               onOffLampu5m();
+                             }
+                            if(seconds == (int) jSpinnerSecond.getValue()  && minutes == (int) jSpinnerMinute.getValue() && hours == (int) jSpinnerHour.getValue()){
+                                state = false;
+                                jPanelDurasi.setBackground(Color.GRAY);
+                                jButtonStart.setEnabled(true);
+                                jSpinnerHour.setEnabled(true);
+                                jSpinnerMinute.setEnabled(true);
+                                jSpinnerSecond.setEnabled(true);
+                                jComboBoxCust.setEnabled(true);
+                                jTextFieldDiskon.setEditable(true);
+                                jSpinnerHour.setValue(0);
+                                jSpinnerMinute.setValue(0);
+                                jSpinnerMinute.setValue(0);
+                                updateTransaksi();
+                                offLampu();
+                            }
+                            if(jam == 0 && menit == 00){
+                                state = false;
+                                jPanelDurasi.setBackground(Color.GRAY);
+                                jButtonStart.setEnabled(true);
+                                jSpinnerHour.setEnabled(true);
+                                jSpinnerMinute.setEnabled(true);
+                                jSpinnerSecond.setEnabled(true);
+                                jComboBoxCust.setEnabled(true);
+                                jTextFieldDiskon.setEditable(true);
+                                jSpinnerHour.setValue(0);
+                                jSpinnerMinute.setValue(0);
+                                jSpinnerMinute.setValue(0);
+                                updateTransaksi();
+                            }
+                            
+                        }
+                        catch(Exception e){  
+                        }
+                    }
+                    }
+                }
             }
         };
         t.start();
@@ -641,18 +928,95 @@ public class Meja_1 extends javax.swing.JPanel implements ActionListener{
         jTextFieldDiskon.setEditable(false);
         jButtonStart.setEnabled(false);
         tambahTransaksi();
-    }//GEN-LAST:event_jButtonStartActionPerformed
+        getDataTransaksi();
+        onLampu();
 
+        
+    }//GEN-LAST:event_jButtonStartActionPerformed
+    public void onLampu(){
+        byte[] ipServer={ (byte)192 , (byte)168 , (byte)1, (byte)111 };
+        Thread threadon = new Thread(){
+            public void run (){
+                try {
+                Socket s=new Socket(InetAddress.getByAddress(ipServer),5000);
+                OutputStream sout = s.getOutputStream();
+                DataInputStream sin = new DataInputStream(s.getInputStream());
+                DataInputStream keyboard = new DataInputStream(System.in);
+                String command = "lampu meja 3 ON";
+                String response ;
+                
+                if (command.equals("lampu meja 3 ON")){
+                    sout.write("e".getBytes());
+                    response=sin.readLine();
+                    System.out.println(response);
+                } 
+                } catch (Exception e) {
+                    JOptionPane.showMessageDialog(null, "Tidak dapat mengirimkan data ke arduino");
+                }
+            }
+        };
+        threadon.start();
+    }
+    
+    public void offLampu(){
+        byte[] ipServer={ (byte)192 , (byte)168 , (byte)1, (byte)111 };
+                                Thread threadoff = new Thread(){
+                                    public void run (){
+                                        try {
+                                            Socket s=new Socket(InetAddress.getByAddress(ipServer),5000);
+                                            OutputStream sout = s.getOutputStream();
+                                            DataInputStream sin = new DataInputStream(s.getInputStream());
+                                            DataInputStream keyboard = new DataInputStream(System.in);
+                                            String command = "lampu meja 3 OFF";
+                                            String response ;
+                
+                                            if (command.equals("lampu meja 3 OFF")){
+                                                sout.write("f".getBytes());
+                                                response=sin.readLine();
+                                                System.out.println(response);
+                                            } 
+                                        } catch (Exception e) {
+                                            JOptionPane.showMessageDialog(null, "Tidak dapat mengirimkan data ke arduino");
+                                        }
+                                    }
+                                };
+                                threadoff.start();
+    }
+    
+    public void onOffLampu5m(){
+        byte[] ipServer={ (byte)192 , (byte)168 , (byte)1, (byte)111 };
+            Thread threadonoff = new Thread(){
+                public void run (){
+                    try {
+                        Socket s=new Socket(InetAddress.getByAddress(ipServer),5000);
+                        OutputStream sout = s.getOutputStream();
+                        DataInputStream sin = new DataInputStream(s.getInputStream());
+                        DataInputStream keyboard = new DataInputStream(System.in);
+                        String command = "lampu meja 3 ONOFF";
+                        String response ;
+                
+                        if (command.equals("lampu meja 3 ONOFF")){
+                            sout.write("0".getBytes());
+                            response=sin.readLine();
+                            System.out.println(response);
+                        } 
+                    } catch (Exception e) {
+                        JOptionPane.showMessageDialog(null, "Tidak dapat mengirimkan data ke arduino");
+                    }
+                }
+            };
+            threadonoff.start();
+    }
     private void jButtonPauseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPauseActionPerformed
         state = false;      
-        //timer.stop();
     }//GEN-LAST:event_jButtonPauseActionPerformed
 
     private void jSpinnerHourStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jSpinnerHourStateChanged
         jam = (int) jSpinnerHour.getValue();
         ddJam = ddFormat.format(jam);
         sisaHour.setText(ddJam + " : ");
-        jamBiayaTotal();
+        //jamBiayaTotal();
+        getDataBiaya();
         convertTominutes();
     }//GEN-LAST:event_jSpinnerHourStateChanged
 
@@ -676,9 +1040,8 @@ public class Meja_1 extends javax.swing.JPanel implements ActionListener{
     }//GEN-LAST:event_jTextFieldDiskonActionPerformed
 
     private void jButtonRefreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRefreshActionPerformed
-        // TODO add your handling code here:
         
-        //timer.stop();
+        state = false;
         jPanelDurasi.setBackground(Color.GRAY);
         jButtonStart.setEnabled(true);
         jSpinnerHour.setEnabled(true);
@@ -700,9 +1063,9 @@ public class Meja_1 extends javax.swing.JPanel implements ActionListener{
         durasiMillisecond.setText("00");
         sisaMillisecond.setText("00");
         jButtonStart.setEnabled(true);
-        jButtonRefresh.addActionListener(this);
-        
-        state = false;
+        //jButtonRefresh.addActionListener(this);
+        updateTransaksi();
+       offLampu();
     }//GEN-LAST:event_jButtonRefreshActionPerformed
 
     private void jComboBoxCustActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxCustActionPerformed
@@ -713,11 +1076,14 @@ public class Meja_1 extends javax.swing.JPanel implements ActionListener{
         // TODO add your handling code here:
         state = true;
         jButtonStart.setEnabled(false);
+        //jButtonLanjutkan.addActionListener(this);
+        //getDataTransaksi();
+        getDataBiaya();
     }//GEN-LAST:event_jButtonLanjutkanActionPerformed
 
     private void jButtonRefreshKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jButtonRefreshKeyPressed
         // TODO add your handling code here:
-        jButtonRefresh.addActionListener(this);
+        //jButtonRefresh.addActionListener(this);
         state = false;
         
     }//GEN-LAST:event_jButtonRefreshKeyPressed
@@ -742,7 +1108,7 @@ public class Meja_1 extends javax.swing.JPanel implements ActionListener{
         formatRp.setGroupingSeparator('.');
 
         kursIndonesia.setDecimalFormatSymbols(formatRp);
-        //System.out.printf("Harga Rupiah: %s %n", kursIndonesia.format(harga));
+        
         
         Integer biayaperjam = 30000;
         Integer biayapermenit = 15000;
@@ -752,10 +1118,13 @@ public class Meja_1 extends javax.swing.JPanel implements ActionListener{
         if (jamBiaya >= 1) {
             biayaTotal = (jamBiaya * biayaperjam);
             jLabelBiaya.setText(Integer.toString(biayaTotal));
+            //kursIndonesia.format(jLabelBiaya.setText(Integer.toString(biayaTotal)));
+            System.out.printf("Harga Rupiah: %s %n", kursIndonesia.format(biayaTotal));
         }
         if (jamBiaya  >=1 && menitBiaya >= 30) {
             biayaTotal = (jamBiaya * biayaperjam) + biayapermenit;
             jLabelBiaya.setText(Integer.toString(biayaTotal));
+            System.out.printf("Harga Rupiah: %s %n", kursIndonesia.format(biayaTotal));
         }
         
     }
@@ -764,108 +1133,58 @@ public class Meja_1 extends javax.swing.JPanel implements ActionListener{
         System.out.println(jComboBoxCust.getSelectedItem());
     }
     
-    public void lossTimer(){
-        Integer biayapermenit = 550;
-        Thread th = new Thread(){
-            public void run(){
-                for (;;) {
-                    if (state = true) {
-                        try {
-                            sleep(1);
-                            if(milliseconds > 1000){
-                                milliseconds = 0;
-                                seconds++;
-                                ddSecond = ddFormat.format(seconds);
-                                durasiSecond.setText(ddSecond);
-                                detik--;
-                                ddDetik = ddFormat.format(detik);
-                            }
-                            if(seconds > 60){
-                                milliseconds = 0;
-                                seconds = 0;
-                                minutes++;
-                                ddMinute = ddFormat.format(minutes);
-                                durasiMinute.setText(ddMinute + " : ");
-                                menit--;
-                                ddMenit = ddFormat.format(menit);
-                                sisaMinute.setText(ddMenit + " : ");
-                            }
-                            if (minutes == 60) {
-                                    seconds = 0;
-                                    minutes = 0;
-                                    hours++;
-                                    ddSecond = ddFormat.format(seconds);
-                                    durasiSecond.setText(" : " + ddSecond);
-                                    ddMinute = ddFormat.format(minutes);
-                                    durasiMinute.setText(" : " +ddMinute);
-                                    ddHour = ddFormat.format(hours);
-                                    durasiHour.setText(""+ ddHour);
-                                    biayaTotal = minutes * biayapermenit;
-                                    jLabelBiaya.setText(Integer.toString(biayaTotal));
-                            }
-                        } catch (Exception e) {
-                        }
-                    }
-                }
-            };
-        };
-        
-        th.start();
-//        timer = new Timer(1000, new  ActionListener() {
-//            @Override
-//            public void actionPerformed(ActionEvent e) {
-//                seconds++;
-//                ddSecond = ddFormat.format(seconds);
-//                durasiSecond.setText(" : " + ddSecond);
-//                ddMinute = ddFormat.format(minutes);
-//                durasiMinute.setText(" : " +ddMinute);
-//                ddHour = ddFormat.format(hours);
-//                durasiHour.setText(""+ ddHour);
-//                
-//                if (seconds == 60) {
-//                    seconds = 0;
-//                    minutes++;
-//                    ddSecond = ddFormat.format(seconds);
-//                    durasiSecond.setText(" :" + ddSecond);
-//                    ddMinute = ddFormat.format(minutes);
-//                    durasiMinute.setText(" :" +ddMinute);
-//                    ddHour = ddFormat.format(hours);
-//                    durasiHour.setText(""+ ddHour);
-//                    biayaTotal = minutes * biayapermenit;
-//                    jLabelBiaya.setText(Integer.toString(biayaTotal));
-//                    
-//                }
-//                if (minutes == 60) {
-//                    seconds = 0;
-//                    minutes = 0;
-//                    hours++;
-//                    ddSecond = ddFormat.format(seconds);
-//                    durasiSecond.setText(" : " + ddSecond);
-//                    ddMinute = ddFormat.format(minutes);
-//                    durasiMinute.setText(" : " +ddMinute);
-//                    ddHour = ddFormat.format(hours);
-//                    durasiHour.setText(""+ ddHour);
-//                }
-//            }
-//        });
-//        
-        
-    }
     public void biayaLossReguler(){
-        Integer biayapermenit = 550;
-        menitBiaya = (int) jSpinnerMinute.getValue();
-        if (menitBiaya == 1) {
-            biayaTotal = menitBiaya * biayapermenit;
-            jLabelBiaya.setText(Integer.toString(biayaTotal));
+        connection = null;
+        Statement st = null;
+        ResultSet rs = null;
+        String namapaket = jComboBoxCust.getSelectedItem().toString();
+        jamBiaya = (int) jSpinnerHour.getValue();
+        DecimalFormat f = new DecimalFormat("#,##0.##");
+        if (connection == null){
+            try {
+                String url = "jdbc:mysql://localhost:3306/infotama_pool_cafe";
+                String user = "root";
+                String pass = "abduh";
+                DriverManager.registerDriver(new com.mysql.cj.jdbc.Driver());
+                connection = (Connection) DriverManager.getConnection(url, user, pass);
+                //connection = koneksi.getConnection();
+                st = connection.createStatement();
+                
+                String sql = "SELECT * FROM biaya WHERE nama_biaya LIKE '%"+namapaket+"%' ORDER BY id_biaya DESC LIMIT 1";
+                rs = st.executeQuery(sql);         
+
+                if (rs.next()) {
+                    //JOptionPane.showMessageDialog(null, "Data transaksi berhasil diupdate");
+                    Integer idbiaya = rs.getInt("id_biaya");
+                    String namabiaya = rs.getString("nama_biaya");
+                    Integer harga = rs.getInt("harga");
+                    
+                    //jLabel_idorder.setText(Integer.toString(idorder));
+                    if ("Loss".equals(namapaket)) {
+                        biayaTotal = (jamBiaya * harga);
+                        jLabelBiaya.setText(Integer.toString(biayaTotal));
+                        //kursIndonesia.format(jLabelBiaya.setText(Integer.toString(biayaTotal)));
+                        
+        }
+                    System.out.println(idbiaya);
+                    System.out.println(namabiaya);
+                    System.out.println(harga);
+                    connection.close();
+                }
+            } 
+            catch (Exception e) {
+                 JOptionPane.showMessageDialog(null, "Gagal get data");
+                 System.out.println("Gagal get data biaya");
+            }     
         }
     }
+    
     public void jamSelesai(){
         String mulai = dateTime.getText().toString();
         Integer selesaiJam = (int) jSpinnerHour.getValue();
         Integer selesaiMenit = (int) jSpinnerMinute.getValue();
     }
     public void tambahTransaksi(){
-        //String idOrder = "16";
         String no_meja = jNomorMeja.getText();
         String jamMulai = dateTime.getText();
         String jamSelesai = jLabelSelesai.getText();
@@ -877,21 +1196,50 @@ public class Meja_1 extends javax.swing.JPanel implements ActionListener{
         String statusOrder = "0";
         String statusBayar = "Lunas";
         String tanggalOrder = jLabelTanggal.getText();
+        connection = null;
+        Statement st = null;
         
         if (connection == null){
             try {
                 String url = "jdbc:mysql://localhost:3306/infotama_pool_cafe";
                 String user = "root";
-                String pass = "@Hazlam2024";
+                String pass = "abduh";
                 DriverManager.registerDriver(new com.mysql.cj.jdbc.Driver());
                 connection = (Connection) DriverManager.getConnection(url, user, pass);
                 //connection = koneksi.getConnection();
-                Statement st = connection.createStatement();
+                st = connection.createStatement();
                 String sql = "INSERT INTO transaksi(no_meja,jam_mulai,jam_selesai,total_biaya,durasi,member,diskon,status_order,status_bayar,tanggal_order) " +
                              "VALUES ('"+no_meja+"','"+jamMulai+"','"+jamSelesai+"','"+totalBiaya+"','"+durasi+"','"+member+"','"+diskon+"','"+statusOrder+"','"+statusBayar+"','"+tanggalOrder+"')";
 
                 st.execute(sql);
                 JOptionPane.showMessageDialog(null, "Data transaksi berhasil ditambahkan");
+                connection.close();
+
+                } catch (Exception e) {
+                 JOptionPane.showMessageDialog(null, "Gagal tambah data transaksi");
+                 
+            }     
+        }
+    }
+    public void updateTransaksi(){
+        String no_meja = jNomorMeja.getText();
+        String id_order = jLabel_idorder.getText();
+        String statusOrder = "1";
+        connection = null;
+        Statement st = null;
+        if (connection == null){
+            try {
+                String url = "jdbc:mysql://localhost:3306/infotama_pool_cafe";
+                String user = "root";
+                String pass = "abduh";
+                DriverManager.registerDriver(new com.mysql.cj.jdbc.Driver());
+                connection = (Connection) DriverManager.getConnection(url, user, pass);
+                //connection = koneksi.getConnection();
+                st = connection.createStatement();
+                String sql = "UPDATE transaksi SET status_order='"+statusOrder+"' WHERE id_order='"+id_order+"' ";
+                             
+                st.execute(sql);
+                JOptionPane.showMessageDialog(null, "Data transaksi berhasil diupdate");
 
                 } catch (Exception e) {
                  JOptionPane.showMessageDialog(null, "Gagal tambah data transaksi");
@@ -899,17 +1247,301 @@ public class Meja_1 extends javax.swing.JPanel implements ActionListener{
         }
     }
     
-    
-    @Override
-    public void actionPerformed(ActionEvent e){
-        if (e.getSource() == jButtonRefresh) {
-            state = false;
-            
-            System.out.println("clik");
+    public void updateTransaksi5m(){
+        String no_meja = jNomorMeja.getText();
+        String id_order = jLabel_idorder.getText();
+        String statusOrder = "01";
+        connection = null;
+        Statement st = null;
+        if (connection == null){
+            try {
+                String url = "jdbc:mysql://localhost:3306/infotama_pool_cafe";
+                String user = "root";
+                String pass = "abduh";
+                DriverManager.registerDriver(new com.mysql.cj.jdbc.Driver());
+                connection = (Connection) DriverManager.getConnection(url, user, pass);
+                //connection = koneksi.getConnection();
+                st = connection.createStatement();
+                String sql = "UPDATE transaksi SET status_order='"+statusOrder+"' WHERE id_order='"+id_order+"'";
+                             
+
+                st.execute(sql);
+                JOptionPane.showMessageDialog(null, "Data transaksi berhasil diupdate");
+                connection.close();
+
+                } catch (Exception e) {
+                 JOptionPane.showMessageDialog(null, "Gagal tambah data transaksi");
+            }     
+        }
+    }
+    public void getDataTransaksi(){
+        connection = null;
+        Statement st = null;
+        ResultSet rs = null;
+        if (connection == null){
+            try {
+                String url = "jdbc:mysql://localhost:3306/infotama_pool_cafe";
+                String user = "root";
+                String pass = "abduh";
+                DriverManager.registerDriver(new com.mysql.cj.jdbc.Driver());
+                connection = (Connection) DriverManager.getConnection(url, user, pass);
+                //connection = koneksi.getConnection();
+                st = connection.createStatement();
+                
+                String sql = "SELECT * FROM transaksi ORDER BY id_order DESC LIMIT 1";
+                rs = st.executeQuery(sql);         
+
+                if (rs.next()) {
+                    //JOptionPane.showMessageDialog(null, "Data transaksi berhasil diupdate");
+                    Integer idorder = rs.getInt("id_order");
+                    String nomeja = rs.getString("no_meja");
+                    
+                    jLabel_idorder.setText(Integer.toString(idorder));
+                    
+//                    System.out.println(idorder);
+//                    System.out.println(nomeja);
+                    connection.close();
+                }
+            } 
+            catch (Exception e) {
+                 JOptionPane.showMessageDialog(null, "Gagal get data");
+                 System.out.println("Gagal get data");
+            }     
         }
     }
     
+    public void getDataBiaya(){
+        connection = null;
+        Statement st = null;
+        ResultSet rs = null;
+        String namapaket = jComboBoxCust.getSelectedItem().toString();
+        jamBiaya = (int) jSpinnerHour.getValue();
+        DecimalFormat f = new DecimalFormat("#,##0.##");
+        if (connection == null){
+            try {
+                String url = "jdbc:mysql://localhost:3306/infotama_pool_cafe";
+                String user = "root";
+                String pass = "abduh";
+                DriverManager.registerDriver(new com.mysql.cj.jdbc.Driver());
+                connection = (Connection) DriverManager.getConnection(url, user, pass);
+                //connection = koneksi.getConnection();
+                st = connection.createStatement();
+                
+                String sql = "SELECT * FROM biaya WHERE nama_biaya LIKE '%"+namapaket+"%' ORDER BY id_biaya DESC LIMIT 1";
+                rs = st.executeQuery(sql);         
+
+                if (rs.next()) {
+                    //JOptionPane.showMessageDialog(null, "Data transaksi berhasil diupdate");
+                    Integer idbiaya = rs.getInt("id_biaya");
+                    String namabiaya = rs.getString("nama_biaya");
+                    Integer harga = rs.getInt("harga");
+                    
+                    //jLabel_idorder.setText(Integer.toString(idorder));
+                    if (jamBiaya >= 1) {
+                        biayaTotal = (jamBiaya * harga);
+                        jLabelBiaya.setText(f.format(biayaTotal));
+                        //kursIndonesia.format(jLabelBiaya.setText(Integer.toString(biayaTotal)));
+                        
+        }
+                    System.out.println(idbiaya);
+                    System.out.println(namabiaya);
+                    System.out.println(harga);
+                    connection.close();
+                }
+            } 
+            catch (Exception e) {
+                 JOptionPane.showMessageDialog(null, "Gagal get data");
+                 System.out.println("Gagal get data biaya");
+            }     
+        }
+    }
+    public void onOffLampu(){
+        byte[] ipServer={ (byte)192 , (byte)168 , (byte)1, (byte)111 }; //that is your router's public ip
+	try{	
+		Socket s=new Socket(InetAddress.getByAddress(ipServer),5000);
+		OutputStream sout=s.getOutputStream();
+		DataInputStream sin=new DataInputStream(s.getInputStream());
+		DataInputStream keyboard=new DataInputStream(System.in);
+		String command,response ;
+		
+            OUTER:
+            while (true) {
+                command=keyboard.readLine();
+//                if (command.equals("TURN ON lampu meja 1")){
+//                    sout.write("a".getBytes());
+//                    response=sin.readLine();
+//                    System.out.println(response);
+//                }
+//                else if (command.equals("TURN OFF lampu meja 1")){
+//                    sout.write("b".getBytes());
+//                    response=sin.readLine();
+//                    System.out.println(response);
+//                }
+                switch (command) {
+                    case "lampu meja 1 ON": 
+                        sout.write("a".getBytes());
+                        response=sin.readLine();
+                        System.out.println(response);
+                        break;
+                    case "lampu meja 1 OFF":
+                        sout.write("b".getBytes());
+                        response=sin.readLine();
+                        System.out.println(response);
+                        break;
+                    case "lampu meja 2 ON": 
+                        sout.write("c".getBytes());
+                        response=sin.readLine();
+                        System.out.println(response);
+                        break;
+                    case "lampu meja 2 OFF":
+                        sout.write("d".getBytes());
+                        response=sin.readLine();
+                        System.out.println(response);
+                        break;
+                    case "lampu meja 3 ON": 
+                        sout.write("e".getBytes());
+                        response=sin.readLine();
+                        System.out.println(response);
+                        break;
+                    case "lampu meja 3 OFF":
+                        sout.write("f".getBytes());
+                        response=sin.readLine();
+                        System.out.println(response);
+                        break;
+                    case "lampu meja 4 ON": 
+                        sout.write("g".getBytes());
+                        response=sin.readLine();
+                        System.out.println(response);
+                        break;
+                    case "lampu meja 4 OFF": 
+                        sout.write("h".getBytes());
+                        response=sin.readLine();
+                        System.out.println(response);
+                        break;
+                    case "lampu meja 5 ON":
+                        sout.write("i".getBytes());
+                        response=sin.readLine();
+                        System.out.println(response);
+                        break;
+                    case "lampu meja 5 OFF": 
+                        sout.write("j".getBytes());
+                        response=sin.readLine();
+                        System.out.println(response);
+                        break;
+                    case "lampu meja 6 ON": 
+                        sout.write("k".getBytes());
+                        response=sin.readLine();
+                        System.out.println(response);
+                        break;
+                    case "lampu meja 6 OFF": 
+                        sout.write("l".getBytes());
+                        response=sin.readLine();
+                        System.out.println(response);
+                        break;
+                    case "lampu meja 7 ON":
+                        sout.write("m".getBytes());
+                        response=sin.readLine();
+                        System.out.println(response);
+                        break;
+                    case "lampu meja 7 OFF":
+                        sout.write("n".getBytes());
+                        response=sin.readLine();
+                        System.out.println(response);
+                        break;
+                    case "lampu meja 8 ON":
+                        sout.write("o".getBytes());
+                        response=sin.readLine();
+                        System.out.println(response);
+                        break;
+                    case "lampu meja 8 OFF":
+                        sout.write("p".getBytes());
+                        response=sin.readLine();
+                        System.out.println(response);
+                        break;
+                    case "lampu meja 9 ON":
+                        sout.write("q".getBytes());
+                        response=sin.readLine();
+                        System.out.println(response);
+                        break;
+                    case "lampu meja 9 OFF":
+                        sout.write("r".getBytes());
+                        response=sin.readLine();
+                        System.out.println(response);
+                        break;
+                    case "lampu meja 10 ON":
+                        sout.write("s".getBytes());
+                        response=sin.readLine();
+                        System.out.println(response);
+                        break;
+                    case "lampu meja 10 OFF":
+                        sout.write("t".getBytes());
+                        response=sin.readLine();
+                        System.out.println(response);
+                        break;
+                    case "lampu meja 11 ON":
+                        sout.write("u".getBytes());
+                        response=sin.readLine();
+                        System.out.println(response);
+                        break;
+                    case "lampu meja 11 OFF":
+                        sout.write("v".getBytes());
+                        response=sin.readLine();
+                        System.out.println(response);
+                        break;
+                    case "lampu meja 12 ON":
+                        sout.write("w".getBytes());
+                        response=sin.readLine();
+                        System.out.println(response);
+                        break;
+                    case "lampu meja 12 OFF":
+                        sout.write("x".getBytes());
+                        response=sin.readLine();
+                        System.out.println(response);
+                        break;
+                    case "lampu meja 13 ON":
+                        sout.write("y".getBytes());
+                        response=sin.readLine();
+                        System.out.println(response);
+                        break;
+                    case "lampu meja 13 OFF":
+                        sout.write("z".getBytes());
+                        response=sin.readLine();
+                        System.out.println(response);
+                        break;
+                    case "EXIT":
+                        s.close();
+                        break OUTER;
+                        
+                    default:
+                        //the user didn't enter one of the known commands
+                        System.out.println("THE KNOWN COMMANDS ARE THE FOLLOWING:");
+                        System.out.println("TURN ON");
+                        System.out.println("TURN OFF");
+                        System.out.println("EXIT");
+                        
+                }
+            }	
+	 }catch(IOException e){
+		 System.out.println(e.getMessage());
+	         System.exit(0);
+	 }
+    }
     
+    @Override
+    public void actionPerformed(ActionEvent evt){
+        
+        if (evt.getSource() == jButtonStart) {
+            System.out.println("click button start");
+        }
+        if (evt.getSource() == jButtonRefresh) {
+            System.out.println("clik button reset");
+        }
+        if (evt.getSource() == jButtonLanjutkan) {
+            System.out.println("Clik button lanjutkan");
+            state = true;
+        }
+
+    }
     
     @Override
     protected void paintComponent(Graphics grphcs) {
@@ -948,6 +1580,7 @@ public class Meja_1 extends javax.swing.JPanel implements ActionListener{
     private javax.swing.JLabel jLabelBiaya;
     private javax.swing.JLabel jLabelSelesai;
     private javax.swing.JLabel jLabelTanggal;
+    private javax.swing.JLabel jLabel_idorder;
     private javax.swing.JLabel jNomorMeja;
     private javax.swing.JPanel jPanelDurasi;
     private javax.swing.JSpinner jSpinnerHour;

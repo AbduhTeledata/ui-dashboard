@@ -17,7 +17,7 @@ public class koneksi {
             try {
                 String url = "jdbc:mysql://localhost:3306/infotama_pool_cafe";
                 String user = "root";
-                String pass = "@Hazlam2024";
+                String pass = "abduh";
                 DriverManager.registerDriver(new com.mysql.cj.jdbc.Driver());
                 connection = (Connection) DriverManager.getConnection(url, user, pass);
             } catch (Exception e) {

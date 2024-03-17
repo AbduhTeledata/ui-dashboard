@@ -1,5 +1,6 @@
 package com.raven.main;
 
+import com.formdev.flatlaf.FlatLaf;
 import com.raven.connection.DatabaseConnection;
 import com.raven.connection.koneksi;
 import com.raven.event.EventMenuSelected;
@@ -9,6 +10,7 @@ import com.raven.form.FormLaporan;
 import com.raven.form.FormHome;
 import com.raven.form.FormBiaya;
 import com.raven.form.FormUser;
+import com.raven.form.JDialogMember;
 import java.awt.Color;
 import java.awt.GradientPaint;
 import java.awt.Graphics;
@@ -18,6 +20,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import javax.swing.JComponent;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
@@ -33,6 +36,7 @@ public class Menu_Utama extends javax.swing.JFrame {
     private FormLaporan formLaporan;
     private FormBiaya formBiaya;
     private FormUser formUser;
+    //private JDialogMember formMember;
     
     private Color color1;
     private Color color2;
@@ -40,8 +44,9 @@ public class Menu_Utama extends javax.swing.JFrame {
 
     public Menu_Utama() {
         initComponents();
-        
-        setBackground(new Color(0, 0, 0, 0));
+        //this.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        //setBackground(new Color(0, 0, 0, 0));
+        //setUndecorated(false);
         
         formHome = new FormHome();
         formMember = new FormMember();
@@ -57,22 +62,24 @@ public class Menu_Utama extends javax.swing.JFrame {
             public void selected(int index) {
                 if (index == 0) {
                     setForm(formHome);
-                } /* else if (index == 1) {
+                }  else if (index == 1) {
                     setForm(formMember);
                 } else if (index == 2) {
-                    setForm(formMakanan);
+                    setForm(formBiaya);
                 } else if (index == 3) {
                     setForm(formLaporan);
                 } else if (index == 4) {
                     setForm(formUser);
-                } else if (index == 5) {
-                    setForm(formBiaya);
-                }*/
+                }
+//                } else if (index == 5) {
+//                    setForm(formUser);
+//                }
             }
         });
         //  set when system open start with home form
         setForm(new FormHome());
-        
+        //this.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        //System.out.println(this.getSize().height + "" + this.getSize().width);
     }
 
     private void setForm(JComponent com) {
@@ -94,25 +101,18 @@ public class Menu_Utama extends javax.swing.JFrame {
         panelBorder1 = new com.raven.swing.PanelBorder();
         menu = new com.raven.component.Menu();
         mainPanel = new javax.swing.JPanel();
-        jLabelClose = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Pool & Cafe Applications");
+        setTitle("Pool & Cafe Apps V1 Standard");
         setExtendedState(MAXIMIZED_BOTH);
-        setUndecorated(true);
 
-        panelBorder1.setBackground(new java.awt.Color(204, 255, 255));
+        panelBorder1.setBackground(new java.awt.Color(255, 255, 255));
 
+        menu.setBackground(new java.awt.Color(255, 255, 255));
+
+        mainPanel.setBackground(new java.awt.Color(255, 255, 255));
         mainPanel.setOpaque(false);
         mainPanel.setLayout(new java.awt.BorderLayout(10, 10));
-
-        jLabelClose.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
-        jLabelClose.setText("Close");
-        jLabelClose.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabelCloseMouseClicked(evt);
-            }
-        });
 
         javax.swing.GroupLayout panelBorder1Layout = new javax.swing.GroupLayout(panelBorder1);
         panelBorder1.setLayout(panelBorder1Layout);
@@ -120,51 +120,35 @@ public class Menu_Utama extends javax.swing.JFrame {
             panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelBorder1Layout.createSequentialGroup()
                 .addComponent(menu, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGroup(panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panelBorder1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(mainPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 683, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelBorder1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabelClose, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(mainPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 683, Short.MAX_VALUE))
         );
         panelBorder1Layout.setVerticalGroup(
             panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelBorder1Layout.createSequentialGroup()
+            .addComponent(mainPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelBorder1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panelBorder1Layout.createSequentialGroup()
-                        .addComponent(jLabelClose)
-                        .addGap(29, 29, 29)
-                        .addComponent(mainPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addContainerGap())
-                    .addComponent(menu, javax.swing.GroupLayout.DEFAULT_SIZE, 613, Short.MAX_VALUE)))
+                .addComponent(menu, javax.swing.GroupLayout.DEFAULT_SIZE, 492, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panelBorder1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(panelBorder1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(panelBorder1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(panelBorder1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
-        pack();
+        setSize(new java.awt.Dimension(922, 505));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jLabelCloseMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelCloseMouseClicked
-        // TODO add your handling code here:
-        dispose();
-    }//GEN-LAST:event_jLabelCloseMouseClicked
-
     public static void main(String[] args) {
+        FlatLaf.registerCustomDefaultsSource("style");
+        
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new Menu_Utama().setVisible(true);
@@ -172,30 +156,9 @@ public class Menu_Utama extends javax.swing.JFrame {
             }
         }); 
     }
-//   public void ModifiableBackgroundCard(){
-//       JPanel jPanel = new JPanel(){
-//            @Override
-//            public void paintComponent(Graphics grphcs)
-//            {
-//                Graphics2D g2 = (Graphics2D) grphcs;
-//                g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-//                GradientPaint g = new GradientPaint(0, 0, color1, 0, getHeight(), color2);
-//                g2.setPaint(g);
-//                g2.fillRoundRect(0, 0, getWidth(), getHeight(), 15, 15);
-//                g2.setColor(new Color(255, 255, 255, 50));
-//                g2.fillOval(getWidth() - (getHeight() / 2), 10, getHeight(), getHeight());
-//                g2.fillOval(getWidth() - (getHeight() / 2) - 20, getHeight() / 2 + 20, getHeight(), getHeight());
-//                super.paintComponent(grphcs);
-//            }
-//        };
-//   }
-    /**
-     * @param args the command line arguments
-     */
-   
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabelClose;
     private javax.swing.JPanel mainPanel;
     private com.raven.component.Menu menu;
     private com.raven.swing.PanelBorder panelBorder1;

@@ -1,20 +1,94 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
- */
 package com.raven.form;
 
-/**
- *
- * @author Zeidr
- */
-public class FormUser extends javax.swing.JPanel {
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
+import java.sql.Statement;
+import java.util.Vector;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
-    /**
-     * Creates new form FormUser
-     */
+
+public class FormUser extends javax.swing.JPanel {
+    
+   private Connection connection;
+   PreparedStatement pst;
+    
     public FormUser() {
         initComponents();
+        table_update();
+        getDataUser();
+    }
+    
+    private void table_update (){
+        connection = null;
+        int CC;
+        try {
+            String url = "jdbc:mysql://localhost:3306/infotama_pool_cafe";
+            String user = "root";
+            String pass = "abduh";
+            DriverManager.registerDriver(new com.mysql.cj.jdbc.Driver());
+            connection = (Connection) DriverManager.getConnection(url, user, pass);
+            pst = connection.prepareStatement("SELECT * FROM pengguna");
+            ResultSet  Rs = pst.executeQuery();
+            
+            ResultSetMetaData stData = Rs.getMetaData();
+            CC = stData.getColumnCount();
+            DefaultTableModel RecordTable = (DefaultTableModel) table_user.getModel();
+            RecordTable.setRowCount(0);
+            
+            while (Rs.next()) {                
+                Vector columnData = new Vector();
+                for (int i = 1; i < CC; i++) {
+                    columnData.add(Rs.getInt("id_pengguna"));
+                    columnData.add(Rs.getString("nama_pengguna"));
+                    columnData.add(Rs.getString("username"));
+                    columnData.add(Rs.getString("telp_pengguna"));
+                    columnData.add(Rs.getString("alamat_pengguna"));
+                }
+                RecordTable.addRow(columnData);
+            }
+            connection.close();
+        } catch (Exception e) {
+            System.out.println("Gagal get data member");
+        }
+            
+    }
+    
+     public void getDataUser(){
+        connection = null;
+        Statement st = null;
+        ResultSet rs = null;
+        if (connection == null){
+            try {
+                String url = "jdbc:mysql://localhost:3306/infotama_pool_cafe";
+                String user = "root";
+                String pass = "abduh";
+                DriverManager.registerDriver(new com.mysql.cj.jdbc.Driver());
+                connection = (Connection) DriverManager.getConnection(url, user, pass);
+                //connection = koneksi.getConnection();
+                st = connection.createStatement();
+                
+                String sql = "SELECT * FROM pengguna ORDER BY id_pengguna DESC LIMIT 1";
+                rs = st.executeQuery(sql);         
+
+                if (rs.next()) {
+                    //JOptionPane.showMessageDialog(null, "Data transaksi berhasil diupdate");
+                    Integer iduser = rs.getInt("id_pengguna");
+                    //jLabelId.setText(Integer.toString(idorder));
+                    
+//                    System.out.println(idorder);
+//                    System.out.println(nomeja);
+                    connection.close();
+                }
+            } 
+            catch (Exception e) {
+                 //JOptionPane.showMessageDialog(null, "Gagal get data User");
+                 System.out.println("Gagal get data user");
+            }     
+        }
     }
 
     /**
@@ -26,19 +100,368 @@ public class FormUser extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+        mainPanelUser = new javax.swing.JPanel();
+        tampilDataUser = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        txt_nama = new javax.swing.JTextField();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        table_user = new javax.swing.JTable();
+        jLabel3 = new javax.swing.JLabel();
+        txt_username = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        txt_telp = new javax.swing.JTextField();
+        jLabel6 = new javax.swing.JLabel();
+        txt_alamat = new javax.swing.JTextField();
+        btn_tambah = new javax.swing.JButton();
+        btn_edit = new javax.swing.JButton();
+        btn_hapus = new javax.swing.JButton();
+        jLabelId = new javax.swing.JLabel();
+        txt_password = new javax.swing.JPasswordField();
+
+        setLayout(new java.awt.CardLayout());
+
+        mainPanelUser.setLayout(new java.awt.CardLayout());
+
+        tampilDataUser.setBackground(new java.awt.Color(255, 255, 255));
+
+        jLabel1.setFont(new java.awt.Font("sansserif", 0, 36)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(106, 106, 106));
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("Data User");
+
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel2.setText("Nama");
+
+        txt_nama.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(0, 0, 0)));
+        txt_nama.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txt_namaActionPerformed(evt);
+            }
+        });
+
+        table_user.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "No", "Nama", "Username", "Telepon", "Alamat"
+            }
+        ));
+        table_user.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                table_userMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(table_user);
+
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel3.setText("Username");
+
+        txt_username.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(0, 0, 0)));
+        txt_username.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txt_usernameActionPerformed(evt);
+            }
+        });
+
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel4.setText("Password");
+
+        jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel5.setText("Telepon");
+
+        txt_telp.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(0, 0, 0)));
+        txt_telp.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txt_telpActionPerformed(evt);
+            }
+        });
+
+        jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel6.setText("Alamat");
+
+        txt_alamat.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(0, 0, 0)));
+        txt_alamat.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txt_alamatActionPerformed(evt);
+            }
+        });
+
+        btn_tambah.setBackground(new java.awt.Color(51, 204, 0));
+        btn_tambah.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btn_tambah.setText("Tambah");
+        btn_tambah.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_tambahActionPerformed(evt);
+            }
+        });
+
+        btn_edit.setBackground(new java.awt.Color(255, 255, 0));
+        btn_edit.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btn_edit.setText("Edit");
+        btn_edit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_editActionPerformed(evt);
+            }
+        });
+
+        btn_hapus.setBackground(new java.awt.Color(204, 0, 51));
+        btn_hapus.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btn_hapus.setText("Hapus");
+        btn_hapus.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_hapusActionPerformed(evt);
+            }
+        });
+
+        jLabelId.setText("jLabel7");
+
+        txt_password.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(0, 0, 0)));
+
+        javax.swing.GroupLayout tampilDataUserLayout = new javax.swing.GroupLayout(tampilDataUser);
+        tampilDataUser.setLayout(tampilDataUserLayout);
+        tampilDataUserLayout.setHorizontalGroup(
+            tampilDataUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(tampilDataUserLayout.createSequentialGroup()
+                .addGroup(tampilDataUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, tampilDataUserLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 905, Short.MAX_VALUE))
+                    .addGroup(tampilDataUserLayout.createSequentialGroup()
+                        .addGroup(tampilDataUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(tampilDataUserLayout.createSequentialGroup()
+                                .addGap(31, 31, 31)
+                                .addComponent(jLabelId))
+                            .addGroup(tampilDataUserLayout.createSequentialGroup()
+                                .addGap(19, 19, 19)
+                                .addGroup(tampilDataUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txt_password, javax.swing.GroupLayout.PREFERRED_SIZE, 321, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(tampilDataUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(txt_nama)
+                                        .addComponent(jLabel2)
+                                        .addComponent(txt_username, javax.swing.GroupLayout.DEFAULT_SIZE, 321, Short.MAX_VALUE)
+                                        .addComponent(jLabel3)
+                                        .addComponent(jLabel4)
+                                        .addComponent(txt_telp, javax.swing.GroupLayout.DEFAULT_SIZE, 321, Short.MAX_VALUE)
+                                        .addComponent(jLabel5)
+                                        .addComponent(txt_alamat, javax.swing.GroupLayout.DEFAULT_SIZE, 321, Short.MAX_VALUE)
+                                        .addComponent(jLabel6)
+                                        .addGroup(tampilDataUserLayout.createSequentialGroup()
+                                            .addComponent(btn_tambah)
+                                            .addGap(42, 42, 42)
+                                            .addComponent(btn_edit, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(btn_hapus))))))
+                        .addGap(54, 54, 54)
+                        .addComponent(jScrollPane1)))
+                .addContainerGap())
         );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+        tampilDataUserLayout.setVerticalGroup(
+            tampilDataUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(tampilDataUserLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(53, 53, 53)
+                .addGroup(tampilDataUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(tampilDataUserLayout.createSequentialGroup()
+                        .addComponent(jScrollPane1)
+                        .addContainerGap())
+                    .addGroup(tampilDataUserLayout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txt_nama, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txt_username, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txt_password, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel5)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txt_telp, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel6)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txt_alamat, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(55, 55, 55)
+                        .addGroup(tampilDataUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btn_tambah)
+                            .addComponent(btn_edit)
+                            .addComponent(btn_hapus))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
+                        .addComponent(jLabelId)
+                        .addGap(24, 24, 24))))
         );
+
+        jLabelId.setVisible(false);
+
+        mainPanelUser.add(tampilDataUser, "card2");
+
+        add(mainPanelUser, "card2");
     }// </editor-fold>//GEN-END:initComponents
+
+    private void txt_namaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_namaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txt_namaActionPerformed
+
+    private void txt_usernameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_usernameActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txt_usernameActionPerformed
+
+    private void txt_telpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_telpActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txt_telpActionPerformed
+
+    private void txt_alamatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_alamatActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txt_alamatActionPerformed
+
+    private void table_userMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_table_userMouseClicked
+        DefaultTableModel model = (DefaultTableModel) table_user.getModel();
+        Integer selectedIndex = table_user.getSelectedRow();
+        jLabelId.setText(model.getValueAt(selectedIndex, 0).toString());
+        txt_nama.setText(model.getValueAt(selectedIndex, 1).toString());
+        txt_username.setText(model.getValueAt(selectedIndex, 2).toString());
+        //txt_password.setText(model.getValueAt(selectedIndex, 3).toString());
+        txt_telp.setText(model.getValueAt(selectedIndex, 3).toString());
+        txt_alamat.setText(model.getValueAt(selectedIndex, 4).toString());
+    }//GEN-LAST:event_table_userMouseClicked
+
+    private void btn_tambahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_tambahActionPerformed
+        String nama = txt_nama.getText();
+        String username = txt_username.getText();
+        String password =txt_password.getText();
+        String telp = txt_telp.getText();
+        String alamat = txt_alamat.getText();
+        String level = "1";
+        
+        connection = null;
+        Statement st = null;
+        
+        if (connection == null){
+            try {
+                String url = "jdbc:mysql://localhost:3306/infotama_pool_cafe";
+                String user = "root";
+                String pass = "abduh";
+                DriverManager.registerDriver(new com.mysql.cj.jdbc.Driver());
+                connection = (Connection) DriverManager.getConnection(url, user, pass);
+                //connection = koneksi.getConnection();
+                st = connection.createStatement();
+                String sql = "INSERT INTO pengguna(nama_pengguna,username,password,telp_pengguna,alamat_pengguna,level) " +
+                             "VALUES ('"+nama+"','"+username+"','"+password+"','"+telp+"','"+alamat+"','"+level+"')";
+
+                st.execute(sql);
+                JOptionPane.showMessageDialog(null, "Data user berhasil ditambahkan");
+                //getDataBiaya();
+                table_update();
+
+                } catch (Exception e) {
+                 JOptionPane.showMessageDialog(null, "Gagal tambah data user");
+                 
+            }     
+        }
+    }//GEN-LAST:event_btn_tambahActionPerformed
+
+    private void btn_editActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_editActionPerformed
+        String id = jLabelId.getText();
+        String nama = txt_nama.getText();
+        String username = txt_username.getText();
+        String password =txt_password.getText();
+        String telp = txt_telp.getText();
+        String alamat = txt_alamat.getText();
+        String level = "1";
+        //String harga = jHarga.getText();
+        connection = null;
+        Statement st = null;
+
+        //        if (connection == null){
+            try {
+                String url = "jdbc:mysql://localhost:3306/infotama_pool_cafe";
+                String user = "root";
+                String pass = "abduh";
+                DriverManager.registerDriver(new com.mysql.cj.jdbc.Driver());
+                connection = (Connection) DriverManager.getConnection(url, user, pass);
+                //connection = koneksi.getConnection();
+                st = connection.createStatement();
+                String sql = "UPDATE pengguna SET nama_pengguna='"+nama+"', username='"+username+"', password='"+password+"',telp_pengguna='"+telp+"',alamat_pengguna='"+alamat+"',level='"+level+"' " + 
+                        "WHERE id_pengguna='"+id+"' ";
+
+                st.execute(sql);
+                JOptionPane.showMessageDialog(null, "Data user berhasil diupdate");
+                table_update();
+                txt_nama.setText("");
+                txt_username.setText("");
+                txt_password.setText("");
+                txt_telp.setText("");
+                txt_alamat.setText("");
+
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, "Gagal update data user");
+            }
+    }//GEN-LAST:event_btn_editActionPerformed
+
+    private void btn_hapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_hapusActionPerformed
+        String id = jLabelId.getText();
+        String nama = txt_nama.getText();
+        String username = txt_username.getText();
+        String password =txt_password.getText();
+        String telp = txt_telp.getText();
+        String alamat = txt_alamat.getText();
+        String level = "1";
+        //String harga = jHarga.getText();
+        connection = null;
+        Statement st = null;
+
+        //        if (connection == null){
+            try {
+                String url = "jdbc:mysql://localhost:3306/infotama_pool_cafe";
+                String user = "root";
+                String pass = "abduh";
+                DriverManager.registerDriver(new com.mysql.cj.jdbc.Driver());
+                connection = (Connection) DriverManager.getConnection(url, user, pass);
+                //connection = koneksi.getConnection();
+                st = connection.createStatement();
+                String sql = "DELETE  FROM pengguna WHERE id_pengguna='"+id+"' ";
+
+                st.execute(sql);
+                JOptionPane.showMessageDialog(null, "Data user berhasil diupdate");
+                table_update();
+                txt_nama.setText("");
+                txt_username.setText("");
+                txt_password.setText("");
+                txt_telp.setText("");
+                txt_alamat.setText("");
+
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, "Gagal update data user");
+            }
+    }//GEN-LAST:event_btn_hapusActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btn_edit;
+    private javax.swing.JButton btn_hapus;
+    private javax.swing.JButton btn_tambah;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabelId;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JPanel mainPanelUser;
+    private javax.swing.JTable table_user;
+    private javax.swing.JPanel tampilDataUser;
+    private javax.swing.JTextField txt_alamat;
+    private javax.swing.JTextField txt_nama;
+    private javax.swing.JPasswordField txt_password;
+    private javax.swing.JTextField txt_telp;
+    private javax.swing.JTextField txt_username;
     // End of variables declaration//GEN-END:variables
 }

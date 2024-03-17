@@ -18,7 +18,7 @@ import javax.swing.JOptionPane;
  */
 public class Form_Login extends javax.swing.JFrame {
     
-    private Connection conn;
+    private Connection connection;
     /**
      * Creates new form NewJFrame
      */
@@ -184,27 +184,31 @@ public class Form_Login extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextFieldUsernameActionPerformed
 
     private void jButtonLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLoginActionPerformed
+        connection = null;
+        Statement st = null;
+        ResultSet rs = null;
         try {
-            conn = koneksi.getConnection();
+            connection = koneksi.getConnection();
             
-            Statement st = conn.createStatement();
+            st = connection.createStatement();
            
             String sql = "SELECT * FROM pengguna WHERE username='" + jTextFieldUsername.getText()
                     +"' and password='"+ jTextFieldPassword.getText() + "'";
-            ResultSet rs = st.executeQuery(sql);
+            rs = st.executeQuery(sql);
             
             if (rs.next()){
                 //JOptionPane.showMessageDialog(null, "Login Successfully");
                 Menu_Utama menu = new Menu_Utama();
+                //menu.setUndecorated(false);
                 menu.setVisible(true);
                 menu.revalidate();
                 this.dispose(); //close the form
-                conn.close();
+                connection.close();
                 
             }else{
                 JOptionPane.showMessageDialog(null, "Username dan Password Salah");
                 jTextFieldPassword.requestFocus();
-                conn.close();
+                connection.close();
             }
         } catch (Exception e) {
              System.out.println("error");

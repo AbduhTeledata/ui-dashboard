@@ -23,7 +23,7 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="1" attributes="0">
+              <Group type="103" groupAlignment="1" max="-2" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <Component id="jButtonStart" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
@@ -39,8 +39,13 @@
                       <Component id="jSpinnerMinute" min="-2" pref="74" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
                           <Component id="jSpinnerSecond" min="-2" pref="74" max="-2" attributes="0"/>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="32767" attributes="0"/>
+                              <Component id="jLabel_idorder" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="13" max="-2" attributes="0"/>
+                          </Group>
                       </Group>
                   </Group>
               </Group>
@@ -89,13 +94,6 @@
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
-                      <Component id="jLabelTanggal" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jPanelDurasi" min="-2" pref="134" max="-2" attributes="0"/>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="0" attributes="0">
                       <Group type="103" groupAlignment="1" attributes="0">
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="lbTitle" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -113,23 +111,33 @@
                       <Component id="lbValues4" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
                           <Component id="jLabel2" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jSpinnerHour" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jSpinnerMinute" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jSpinnerSecond" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jButtonStart" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jButtonPause" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jButtonLanjutkan" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jButtonRefresh" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
                   </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <Component id="jLabelTanggal" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="jPanelDurasi" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="jLabel_idorder" min="-2" max="-2" attributes="0"/>
+                  </Group>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="jSpinnerHour" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jSpinnerMinute" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jSpinnerSecond" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="jButtonStart" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jButtonPause" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jButtonLanjutkan" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jButtonRefresh" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="32767" attributes="0"/>
           </Group>
@@ -225,11 +233,12 @@
     <Component class="javax.swing.JComboBox" name="jComboBoxCust">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="4">
-            <StringItem index="0" value="Paket"/>
-            <StringItem index="1" value="Reguler"/>
-            <StringItem index="2" value="Free Reguler"/>
-            <StringItem index="3" value="Loss Reguler"/>
+          <StringArray count="5">
+            <StringItem index="0" value="Reguler"/>
+            <StringItem index="1" value="Paket"/>
+            <StringItem index="2" value="Free"/>
+            <StringItem index="3" value="Loss"/>
+            <StringItem index="4" value="Member"/>
           </StringArray>
         </Property>
       </Properties>
@@ -448,18 +457,18 @@
         <Component class="javax.swing.JLabel" name="jLabel8">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="SansSerif" size="14" style="1"/>
+              <Font name="SansSerif" size="18" style="1"/>
             </Property>
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="ff" red="ff" type="rgb"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Biaya   :"/>
+            <Property name="text" type="java.lang.String" value="Biaya:"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabelBiaya">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="SansSerif" size="14" style="1"/>
+              <Font name="SansSerif" size="18" style="1"/>
             </Property>
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="ff" red="ff" type="rgb"/>
@@ -597,6 +606,14 @@
       </Properties>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="jLabelTanggal.setVisible(false);"/>
+      </AuxValues>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabel_idorder">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="id order"/>
+      </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="jLabel_idorder.setVisible(false);"/>
       </AuxValues>
     </Component>
   </SubComponents>
