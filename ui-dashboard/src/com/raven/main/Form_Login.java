@@ -19,6 +19,7 @@ import javax.swing.JOptionPane;
 public class Form_Login extends javax.swing.JFrame {
     
     private Connection connection;
+    String vnama_user, vlev_user;
     /**
      * Creates new form NewJFrame
      */
@@ -187,6 +188,7 @@ public class Form_Login extends javax.swing.JFrame {
         connection = null;
         Statement st = null;
         ResultSet rs = null;
+        
         try {
             connection = koneksi.getConnection();
             
@@ -197,15 +199,31 @@ public class Form_Login extends javax.swing.JFrame {
             rs = st.executeQuery(sql);
             
             if (rs.next()){
+                vnama_user = rs.getString("username");
+                vlev_user = rs.getString("level");
+                if ( vlev_user.equals("Operator")) {
+                     Menu_Utama menu = new Menu_Utama();
+                    //menu.setUndecorated(false);
+                    menu.setVisible(true);
+                    menu.revalidate();
+                    System.out.println("menu Operator");
+                    this.dispose(); //close the form
+                    connection.close();
+                }else if (vlev_user.equals("Admin")) {
+                    Menu_Utama1 menu1 = new Menu_Utama1();
+                    //menu.setUndecorated(false);
+                    menu1.setVisible(true);
+                    menu1.revalidate();
+                    System.out.println("menu Admin");
+                    this.dispose(); //close the form
+                    connection.close();
+                }
                 //JOptionPane.showMessageDialog(null, "Login Successfully");
-                Menu_Utama menu = new Menu_Utama();
-                //menu.setUndecorated(false);
-                menu.setVisible(true);
-                menu.revalidate();
-                this.dispose(); //close the form
-                connection.close();
+               
                 
-            }else{
+            
+            }
+            else{
                 JOptionPane.showMessageDialog(null, "Username dan Password Salah");
                 jTextFieldPassword.requestFocus();
                 connection.close();

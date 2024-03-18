@@ -47,6 +47,7 @@ public class FormUser extends javax.swing.JPanel {
                     columnData.add(Rs.getString("username"));
                     columnData.add(Rs.getString("telp_pengguna"));
                     columnData.add(Rs.getString("alamat_pengguna"));
+                    columnData.add(Rs.getString("level"));
                 }
                 RecordTable.addRow(columnData);
             }
@@ -119,6 +120,8 @@ public class FormUser extends javax.swing.JPanel {
         btn_hapus = new javax.swing.JButton();
         jLabelId = new javax.swing.JLabel();
         txt_password = new javax.swing.JPasswordField();
+        jComboBoxRole = new javax.swing.JComboBox<>();
+        jLabel7 = new javax.swing.JLabel();
 
         setLayout(new java.awt.CardLayout());
 
@@ -146,7 +149,7 @@ public class FormUser extends javax.swing.JPanel {
 
             },
             new String [] {
-                "No", "Nama", "Username", "Telepon", "Alamat"
+                "No", "Nama", "Username", "Telepon", "Alamat", "Hak Akses"
             }
         ));
         table_user.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -220,6 +223,12 @@ public class FormUser extends javax.swing.JPanel {
 
         txt_password.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(0, 0, 0)));
 
+        jComboBoxRole.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Admin", "Operator" }));
+        jComboBoxRole.setBorder(null);
+
+        jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel7.setText("Hak Akses");
+
         javax.swing.GroupLayout tampilDataUserLayout = new javax.swing.GroupLayout(tampilDataUser);
         tampilDataUser.setLayout(tampilDataUserLayout);
         tampilDataUserLayout.setHorizontalGroup(
@@ -247,13 +256,16 @@ public class FormUser extends javax.swing.JPanel {
                                         .addComponent(txt_telp, javax.swing.GroupLayout.DEFAULT_SIZE, 321, Short.MAX_VALUE)
                                         .addComponent(jLabel5)
                                         .addComponent(txt_alamat, javax.swing.GroupLayout.DEFAULT_SIZE, 321, Short.MAX_VALUE)
-                                        .addComponent(jLabel6)
+                                        .addComponent(jLabel6))
+                                    .addComponent(jLabel7)
+                                    .addGroup(tampilDataUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                         .addGroup(tampilDataUserLayout.createSequentialGroup()
                                             .addComponent(btn_tambah)
-                                            .addGap(42, 42, 42)
+                                            .addGap(39, 39, 39)
                                             .addComponent(btn_edit, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(btn_hapus))))))
+                                            .addComponent(btn_hapus))
+                                        .addComponent(jComboBoxRole, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 321, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                         .addGap(54, 54, 54)
                         .addComponent(jScrollPane1)))
                 .addContainerGap())
@@ -265,9 +277,6 @@ public class FormUser extends javax.swing.JPanel {
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(53, 53, 53)
                 .addGroup(tampilDataUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(tampilDataUserLayout.createSequentialGroup()
-                        .addComponent(jScrollPane1)
-                        .addContainerGap())
                     .addGroup(tampilDataUserLayout.createSequentialGroup()
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -288,14 +297,19 @@ public class FormUser extends javax.swing.JPanel {
                         .addComponent(jLabel6)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txt_alamat, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(55, 55, 55)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel7)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jComboBoxRole, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(tampilDataUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(btn_tambah)
                             .addComponent(btn_edit)
                             .addComponent(btn_hapus))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
-                        .addComponent(jLabelId)
-                        .addGap(24, 24, 24))))
+                        .addGap(51, 51, 51)
+                        .addComponent(jLabelId))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 535, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         jLabelId.setVisible(false);
@@ -338,7 +352,7 @@ public class FormUser extends javax.swing.JPanel {
         String password =txt_password.getText();
         String telp = txt_telp.getText();
         String alamat = txt_alamat.getText();
-        String level = "1";
+        String level = jComboBoxRole.getSelectedItem().toString();
         
         connection = null;
         Statement st = null;
@@ -374,7 +388,7 @@ public class FormUser extends javax.swing.JPanel {
         String password =txt_password.getText();
         String telp = txt_telp.getText();
         String alamat = txt_alamat.getText();
-        String level = "1";
+        String level = jComboBoxRole.getSelectedItem().toString();
         //String harga = jHarga.getText();
         connection = null;
         Statement st = null;
@@ -412,7 +426,7 @@ public class FormUser extends javax.swing.JPanel {
         String password =txt_password.getText();
         String telp = txt_telp.getText();
         String alamat = txt_alamat.getText();
-        String level = "1";
+         String level = jComboBoxRole.getSelectedItem().toString();
         //String harga = jHarga.getText();
         connection = null;
         Statement st = null;
@@ -429,7 +443,7 @@ public class FormUser extends javax.swing.JPanel {
                 String sql = "DELETE  FROM pengguna WHERE id_pengguna='"+id+"' ";
 
                 st.execute(sql);
-                JOptionPane.showMessageDialog(null, "Data user berhasil diupdate");
+                JOptionPane.showMessageDialog(null, "Data user berhasil di hapus");
                 table_update();
                 txt_nama.setText("");
                 txt_username.setText("");
@@ -438,7 +452,7 @@ public class FormUser extends javax.swing.JPanel {
                 txt_alamat.setText("");
 
             } catch (Exception e) {
-                JOptionPane.showMessageDialog(null, "Gagal update data user");
+                JOptionPane.showMessageDialog(null, "Gagal hapus data user");
             }
     }//GEN-LAST:event_btn_hapusActionPerformed
 
@@ -447,12 +461,14 @@ public class FormUser extends javax.swing.JPanel {
     private javax.swing.JButton btn_edit;
     private javax.swing.JButton btn_hapus;
     private javax.swing.JButton btn_tambah;
+    private javax.swing.JComboBox<String> jComboBoxRole;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabelId;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JPanel mainPanelUser;

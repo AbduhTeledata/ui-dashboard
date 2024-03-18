@@ -12,7 +12,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
 import javax.swing.JFrame;
 
-public class Menu extends javax.swing.JPanel {
+public class Menu1 extends javax.swing.JPanel {
 
     private EventMenuSelected event;
 
@@ -21,7 +21,7 @@ public class Menu extends javax.swing.JPanel {
         listMenu1.addEventMenuSelected(event);
     }
 
-    public Menu() {
+    public Menu1() {
         initComponents();
         setOpaque(false);
         listMenu1.setOpaque(false);
@@ -29,12 +29,12 @@ public class Menu extends javax.swing.JPanel {
     }
 
     private void init() {
-        listMenu1.addItem(new Model_Menu("1", "Dashboard", Model_Menu.MenuType.MENU));
-//        listMenu1.addItem(new Model_Menu("2", "Member", Model_Menu.MenuType.MENU));
-//        listMenu1.addItem(new Model_Menu("3", "Harga", Model_Menu.MenuType.MENU));
-//        listMenu1.addItem(new Model_Menu("4", "Laporan", Model_Menu.MenuType.MENU));
-//        listMenu1.addItem(new Model_Menu("5", "User", Model_Menu.MenuType.MENU));
-//        listMenu1.addItem(new Model_Menu("", " ", Model_Menu.MenuType.EMPTY));
+        //listMenu1.addItem(new Model_Menu("1", "Dashboard", Model_Menu.MenuType.MENU));
+        listMenu1.addItem(new Model_Menu("1", "Member", Model_Menu.MenuType.MENU));
+        listMenu1.addItem(new Model_Menu("2", "Harga", Model_Menu.MenuType.MENU));
+        listMenu1.addItem(new Model_Menu("3", "Laporan", Model_Menu.MenuType.MENU));
+        listMenu1.addItem(new Model_Menu("4", "User", Model_Menu.MenuType.MENU));
+        listMenu1.addItem(new Model_Menu("", " ", Model_Menu.MenuType.EMPTY));
 
         //listMenu1.addItem(new Model_Menu("", "Setting", Model_Menu.MenuType.TITLE));
         //listMenu1.addItem(new Model_Menu("", " ", Model_Menu.MenuType.EMPTY));

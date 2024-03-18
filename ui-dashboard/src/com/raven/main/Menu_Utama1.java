@@ -4,6 +4,7 @@ import com.formdev.flatlaf.FlatLaf;
 import com.raven.connection.DatabaseConnection;
 import com.raven.connection.koneksi;
 import com.raven.event.EventMenuSelected;
+import com.raven.form.FormAdmin;
 import com.raven.form.FormMember;
 import com.raven.form.FormMakanan;
 import com.raven.form.FormLaporan;
@@ -25,12 +26,12 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 
-public class Menu_Utama extends javax.swing.JFrame {
+public class Menu_Utama1 extends javax.swing.JFrame {
 
     /**
      * Creates new form Main
      */
-    private FormHome formHome;
+    //private FormHome formHome;
     private FormMember formMember;
     private FormMakanan formMakanan;
     private FormLaporan formLaporan;
@@ -42,34 +43,34 @@ public class Menu_Utama extends javax.swing.JFrame {
     private Color color2;
     private Connection connection;
 
-    public Menu_Utama() {
+    public Menu_Utama1() {
         initComponents();
         //this.setExtendedState(JFrame.MAXIMIZED_BOTH);
         //setBackground(new Color(0, 0, 0, 0));
         //setUndecorated(false);
         
-        formHome = new FormHome();
+        //formHome = new FormHome();
         formMember = new FormMember();
         formMakanan = new FormMakanan();
         formLaporan = new FormLaporan();
         formBiaya = new FormBiaya();
         formUser = new FormUser();
         
-        menu.initMoving(Menu_Utama.this);
+        menu1.initMoving(Menu_Utama1.this);
         
-        menu.addEventMenuSelected(new EventMenuSelected() {
+        menu1.addEventMenuSelected(new EventMenuSelected() {
             @Override
             public void selected(int index) {
+//                if (index == 0) {
+//                    setForm(formHome);
+//                }  
                 if (index == 0) {
-                    setForm(formHome);
-                }  
-                else if (index == 1) {
                     setForm(formMember);
-                } else if (index == 2) {
+                } else if (index == 1) {
                     setForm(formBiaya);
-                } else if (index == 3) {
+                } else if (index == 2) {
                     setForm(formLaporan);
-                } else if (index == 4) {
+                } else if (index == 3) {
                     setForm(formUser);
                 }
 //                } else if (index == 5) {
@@ -78,7 +79,7 @@ public class Menu_Utama extends javax.swing.JFrame {
             }
         });
         //  set when system open start with home form
-        setForm(new FormHome());
+        setForm(new FormAdmin());
         //this.setExtendedState(JFrame.MAXIMIZED_BOTH);
         //System.out.println(this.getSize().height + "" + this.getSize().width);
     }
@@ -100,16 +101,14 @@ public class Menu_Utama extends javax.swing.JFrame {
     private void initComponents() {
 
         panelBorder1 = new com.raven.swing.PanelBorder();
-        menu = new com.raven.component.Menu();
         mainPanel = new javax.swing.JPanel();
+        menu1 = new com.raven.component.Menu1();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Pool & Cafe Apps V1 Standard");
         setExtendedState(MAXIMIZED_BOTH);
 
         panelBorder1.setBackground(new java.awt.Color(255, 255, 255));
-
-        menu.setBackground(new java.awt.Color(255, 255, 255));
 
         mainPanel.setBackground(new java.awt.Color(255, 255, 255));
         mainPanel.setOpaque(false);
@@ -120,16 +119,16 @@ public class Menu_Utama extends javax.swing.JFrame {
         panelBorder1Layout.setHorizontalGroup(
             panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelBorder1Layout.createSequentialGroup()
-                .addComponent(menu, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(menu1, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addComponent(mainPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 683, Short.MAX_VALUE))
         );
         panelBorder1Layout.setVerticalGroup(
             panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(mainPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelBorder1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(menu, javax.swing.GroupLayout.DEFAULT_SIZE, 492, Short.MAX_VALUE))
+            .addGroup(panelBorder1Layout.createSequentialGroup()
+                .addComponent(menu1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(3, 3, 3))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -152,7 +151,7 @@ public class Menu_Utama extends javax.swing.JFrame {
         
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Menu_Utama().setVisible(true);
+                new Menu_Utama1().setVisible(true);
                 
             }
         }); 
@@ -161,7 +160,7 @@ public class Menu_Utama extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel mainPanel;
-    private com.raven.component.Menu menu;
+    private com.raven.component.Menu1 menu1;
     private com.raven.swing.PanelBorder panelBorder1;
     // End of variables declaration//GEN-END:variables
 }
