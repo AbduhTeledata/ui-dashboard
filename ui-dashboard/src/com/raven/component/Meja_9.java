@@ -947,8 +947,8 @@ public class Meja_9 extends javax.swing.JPanel implements ActionListener{
                 
                 if (command.equals("lampu meja 11 ON")){
                     sout.write("u".getBytes());
-                    response=sin.readLine();
-                    System.out.println(response);
+//                    response=sin.readLine();
+//                    System.out.println(response);
                 } 
                 } catch (Exception e) {
                     JOptionPane.showMessageDialog(null, "Tidak dapat mengirimkan data ke arduino");
@@ -972,8 +972,8 @@ public class Meja_9 extends javax.swing.JPanel implements ActionListener{
                 
                                             if (command.equals("lampu meja 11 OFF")){
                                                 sout.write("v".getBytes());
-                                                response=sin.readLine();
-                                                System.out.println(response);
+//                                                response=sin.readLine();
+//                                                System.out.println(response);
                                             } 
                                         } catch (Exception e) {
                                             JOptionPane.showMessageDialog(null, "Tidak dapat mengirimkan data ke arduino");
@@ -997,8 +997,8 @@ public class Meja_9 extends javax.swing.JPanel implements ActionListener{
                 
                         if (command.equals("lampu meja 11 ONOFF")){
                             sout.write("8".getBytes());
-                            response=sin.readLine();
-                            System.out.println(response);
+//                            response=sin.readLine();
+//                            System.out.println(response);
                         } 
                     } catch (Exception e) {
                         JOptionPane.showMessageDialog(null, "Tidak dapat mengirimkan data ke arduino");

@@ -947,8 +947,8 @@ public class Meja_10 extends javax.swing.JPanel implements ActionListener{
                 
                 if (command.equals("lampu meja 12 ON")){
                     sout.write("x".getBytes());
-                    response=sin.readLine();
-                    System.out.println(response);
+//                    response=sin.readLine();
+//                    System.out.println(response);
                 } 
                 } catch (Exception e) {
                     JOptionPane.showMessageDialog(null, "Tidak dapat mengirimkan data ke arduino");
@@ -972,8 +972,8 @@ public class Meja_10 extends javax.swing.JPanel implements ActionListener{
                 
                                             if (command.equals("lampu meja 12 OFF")){
                                                 sout.write("x".getBytes());
-                                                response=sin.readLine();
-                                                System.out.println(response);
+//                                                response=sin.readLine();
+//                                                System.out.println(response);
                                             } 
                                         } catch (Exception e) {
                                             JOptionPane.showMessageDialog(null, "Tidak dapat mengirimkan data ke arduino");
@@ -997,8 +997,8 @@ public class Meja_10 extends javax.swing.JPanel implements ActionListener{
                 
                         if (command.equals("lampu meja 12 ONOFF")){
                             sout.write("9".getBytes());
-                            response=sin.readLine();
-                            System.out.println(response);
+//                            response=sin.readLine();
+//                            System.out.println(response);
                         } 
                     } catch (Exception e) {
                         JOptionPane.showMessageDialog(null, "Tidak dapat mengirimkan data ke arduino");

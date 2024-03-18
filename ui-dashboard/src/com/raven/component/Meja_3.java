@@ -947,8 +947,8 @@ public class Meja_3 extends javax.swing.JPanel implements ActionListener{
                 
                 if (command.equals("lampu meja 5 ON")){
                     sout.write("i".getBytes());
-                    response=sin.readLine();
-                    System.out.println(response);
+//                    response=sin.readLine();
+//                    System.out.println(response);
                 } 
                 } catch (Exception e) {
                     JOptionPane.showMessageDialog(null, "Tidak dapat mengirimkan data ke arduino");
@@ -972,8 +972,8 @@ public class Meja_3 extends javax.swing.JPanel implements ActionListener{
                 
                                             if (command.equals("lampu meja 5 OFF")){
                                                 sout.write("j".getBytes());
-                                                response=sin.readLine();
-                                                System.out.println(response);
+//                                                response=sin.readLine();
+//                                                System.out.println(response);
                                             } 
                                         } catch (Exception e) {
                                             JOptionPane.showMessageDialog(null, "Tidak dapat mengirimkan data ke arduino");
@@ -997,8 +997,8 @@ public class Meja_3 extends javax.swing.JPanel implements ActionListener{
                 
                         if (command.equals("lampu meja 5 ONOFF")){
                             sout.write("2".getBytes());
-                            response=sin.readLine();
-                            System.out.println(response);
+//                            response=sin.readLine();
+//                            System.out.println(response);
                         } 
                     } catch (Exception e) {
                         JOptionPane.showMessageDialog(null, "Tidak dapat mengirimkan data ke arduino");
