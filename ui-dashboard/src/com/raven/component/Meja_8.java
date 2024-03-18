@@ -934,7 +934,7 @@ public class Meja_8 extends javax.swing.JPanel implements ActionListener{
         
     }//GEN-LAST:event_jButtonStartActionPerformed
     public void onLampu(){
-        byte[] ipServer={ (byte)192 , (byte)168 , (byte)1, (byte)111 };
+        byte[] ipServer={ (byte)192 , (byte)168 , (byte)1, (byte)112 };
         Thread threadon = new Thread(){
             public void run (){
                 try {
@@ -946,7 +946,7 @@ public class Meja_8 extends javax.swing.JPanel implements ActionListener{
                 String response ;
                 
                 if (command.equals("lampu meja 10 ON")){
-                    sout.write("s".getBytes());
+                    sout.write("i".getBytes());
 //                    response=sin.readLine();
 //                    System.out.println(response);
                 } 
@@ -959,7 +959,7 @@ public class Meja_8 extends javax.swing.JPanel implements ActionListener{
     }
     
     public void offLampu(){
-        byte[] ipServer={ (byte)192 , (byte)168 , (byte)1, (byte)111 };
+        byte[] ipServer={ (byte)192 , (byte)168 , (byte)1, (byte)112 };
                                 Thread threadoff = new Thread(){
                                     public void run (){
                                         try {
@@ -971,7 +971,7 @@ public class Meja_8 extends javax.swing.JPanel implements ActionListener{
                                             String response ;
                 
                                             if (command.equals("lampu meja 10 OFF")){
-                                                sout.write("t".getBytes());
+                                                sout.write("j".getBytes());
 //                                                response=sin.readLine();
 //                                                System.out.println(response);
                                             } 
@@ -984,7 +984,7 @@ public class Meja_8 extends javax.swing.JPanel implements ActionListener{
     }
     
     public void onOffLampu5m(){
-        byte[] ipServer={ (byte)192 , (byte)168 , (byte)1, (byte)111 };
+        byte[] ipServer={ (byte)192 , (byte)168 , (byte)1, (byte)112 };
             Thread threadonoff = new Thread(){
                 public void run (){
                     try {
@@ -996,7 +996,7 @@ public class Meja_8 extends javax.swing.JPanel implements ActionListener{
                         String response ;
                 
                         if (command.equals("lampu meja 10 ONOFF")){
-                            sout.write("7".getBytes());
+                            sout.write("2".getBytes());
 //                            response=sin.readLine();
 //                            System.out.println(response);
                         } 

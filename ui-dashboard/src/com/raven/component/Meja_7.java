@@ -934,7 +934,7 @@ public class Meja_7 extends javax.swing.JPanel implements ActionListener{
         
     }//GEN-LAST:event_jButtonStartActionPerformed
     public void onLampu(){
-        byte[] ipServer={ (byte)192 , (byte)168 , (byte)1, (byte)111 };
+        byte[] ipServer={ (byte)192 , (byte)168 , (byte)1, (byte)112 };
         Thread threadon = new Thread(){
             public void run (){
                 try {
@@ -942,11 +942,11 @@ public class Meja_7 extends javax.swing.JPanel implements ActionListener{
                 OutputStream sout = s.getOutputStream();
                 DataInputStream sin = new DataInputStream(s.getInputStream());
                 DataInputStream keyboard = new DataInputStream(System.in);
-                String command = "lampu meja 9 ON";
+                String command = "lampu meja 7 ON";
                 String response ;
                 
-                if (command.equals("lampu meja 9 ON")){
-                    sout.write("q".getBytes());
+                if (command.equals("lampu meja 7 ON")){
+                    sout.write("g".getBytes());
 //                    response=sin.readLine();
 //                    System.out.println(response);
                 } 
@@ -959,7 +959,7 @@ public class Meja_7 extends javax.swing.JPanel implements ActionListener{
     }
     
     public void offLampu(){
-        byte[] ipServer={ (byte)192 , (byte)168 , (byte)1, (byte)111 };
+        byte[] ipServer={ (byte)192 , (byte)168 , (byte)1, (byte)112 };
                                 Thread threadoff = new Thread(){
                                     public void run (){
                                         try {
@@ -967,11 +967,11 @@ public class Meja_7 extends javax.swing.JPanel implements ActionListener{
                                             OutputStream sout = s.getOutputStream();
                                             DataInputStream sin = new DataInputStream(s.getInputStream());
                                             DataInputStream keyboard = new DataInputStream(System.in);
-                                            String command = "lampu meja 9 OFF";
+                                            String command = "lampu meja 7 OFF";
                                             String response ;
                 
                                             if (command.equals("lampu meja 9 OFF")){
-                                                sout.write("r".getBytes());
+                                                sout.write("h".getBytes());
 //                                                response=sin.readLine();
 //                                                System.out.println(response);
                                             } 
@@ -984,7 +984,7 @@ public class Meja_7 extends javax.swing.JPanel implements ActionListener{
     }
     
     public void onOffLampu5m(){
-        byte[] ipServer={ (byte)192 , (byte)168 , (byte)1, (byte)111 };
+        byte[] ipServer={ (byte)192 , (byte)168 , (byte)1, (byte)112 };
             Thread threadonoff = new Thread(){
                 public void run (){
                     try {
@@ -992,11 +992,11 @@ public class Meja_7 extends javax.swing.JPanel implements ActionListener{
                         OutputStream sout = s.getOutputStream();
                         DataInputStream sin = new DataInputStream(s.getInputStream());
                         DataInputStream keyboard = new DataInputStream(System.in);
-                        String command = "lampu meja 9 ONOFF";
+                        String command = "lampu meja 7 ONOFF";
                         String response ;
                 
-                        if (command.equals("lampu meja 9 ONOFF")){
-                            sout.write("6".getBytes());
+                        if (command.equals("lampu meja 7 ONOFF")){
+                            sout.write("1".getBytes());
 //                            response=sin.readLine();
 //                            System.out.println(response);
                         } 
