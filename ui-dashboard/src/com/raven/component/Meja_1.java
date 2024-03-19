@@ -65,6 +65,7 @@ public class Meja_1 extends javax.swing.JPanel implements ActionListener{
    
     String ddSecond, ddMinute, ddHour, ddJam, ddMenit, ddDetik;
     DecimalFormat ddFormat = new DecimalFormat("00");
+    byte[] ipServer={ (byte)192 , (byte)168 , (byte)1, (byte)111 };
     
     Timer timer;
     private Connection conn;
@@ -582,7 +583,7 @@ public class Meja_1 extends javax.swing.JPanel implements ActionListener{
                             if( jam == 0 && menit <= 5){
                                jPanelDurasi.setBackground(Color.RED); 
                                //updateTransaksi5m();
-                               onOffLampu5m();
+                               //onOffLampu5m();
 
                              }
                             if(seconds == (int) jSpinnerSecond.getValue()  && minutes == (int) jSpinnerMinute.getValue() && hours == (int) jSpinnerHour.getValue()){
@@ -670,7 +671,7 @@ public class Meja_1 extends javax.swing.JPanel implements ActionListener{
                             if( jam == 0 && menit <= 5){
                                jPanelDurasi.setBackground(Color.RED); 
                                //updateTransaksi5m();
-                               onOffLampu5m();
+                               //onOffLampu5m();
                              }
                             if(seconds == (int) jSpinnerSecond.getValue()  && minutes == (int) jSpinnerMinute.getValue() && hours == (int) jSpinnerHour.getValue()){
                                 state = false;
@@ -757,7 +758,7 @@ public class Meja_1 extends javax.swing.JPanel implements ActionListener{
                             if( jam == 0 && menit <= 5){
                                jPanelDurasi.setBackground(Color.RED); 
                                //updateTransaksi5m();
-                               onOffLampu5m();
+                               //onOffLampu5m();
                              }
                             if(seconds == (int) jSpinnerSecond.getValue()  && minutes == (int) jSpinnerMinute.getValue() && hours == (int) jSpinnerHour.getValue()){
                                 state = false;
@@ -887,7 +888,7 @@ public class Meja_1 extends javax.swing.JPanel implements ActionListener{
                             if( jam == 0 && menit <= 5){
                                jPanelDurasi.setBackground(Color.RED); 
                                //updateTransaksi5m();
-                               onOffLampu5m();
+                               //onOffLampu5m();
                              }
                             if(seconds == (int) jSpinnerSecond.getValue()  && minutes == (int) jSpinnerMinute.getValue() && hours == (int) jSpinnerHour.getValue()){
                                 state = false;
@@ -944,7 +945,7 @@ public class Meja_1 extends javax.swing.JPanel implements ActionListener{
         
     }//GEN-LAST:event_jButtonStartActionPerformed
     public void onLampu(){
-        byte[] ipServer={ (byte)192 , (byte)168 , (byte)1, (byte)111 };
+        
         Thread threadon = new Thread(){
             public void run (){
                 try {
@@ -969,7 +970,7 @@ public class Meja_1 extends javax.swing.JPanel implements ActionListener{
     }
     
     public void offLampu(){
-        byte[] ipServer={ (byte)192 , (byte)168 , (byte)1, (byte)111 };
+        //byte[] ipServer={ (byte)192 , (byte)168 , (byte)1, (byte)111 };
                                 Thread threadoff = new Thread(){
                                     public void run (){
                                         try {
@@ -994,7 +995,7 @@ public class Meja_1 extends javax.swing.JPanel implements ActionListener{
     }
     
     public void onOffLampu5m(){
-        byte[] ipServer={ (byte)192 , (byte)168 , (byte)1, (byte)111 };
+        //byte[] ipServer={ (byte)192 , (byte)168 , (byte)1, (byte)111 };
             Thread threadonoff = new Thread(){
                 public void run (){
                     try {

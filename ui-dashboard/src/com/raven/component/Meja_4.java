@@ -572,7 +572,7 @@ public class Meja_4 extends javax.swing.JPanel implements ActionListener{
                             if( jam == 0 && menit <= 5){
                                jPanelDurasi.setBackground(Color.RED); 
                                //updateTransaksi5m();
-                               onOffLampu5m();
+                               //onOffLampu5m();
 
                              }
                             if(seconds == (int) jSpinnerSecond.getValue()  && minutes == (int) jSpinnerMinute.getValue() && hours == (int) jSpinnerHour.getValue()){
@@ -660,7 +660,7 @@ public class Meja_4 extends javax.swing.JPanel implements ActionListener{
                             if( jam == 0 && menit <= 5){
                                jPanelDurasi.setBackground(Color.RED); 
                                //updateTransaksi5m();
-                               onOffLampu5m();
+                               //onOffLampu5m();
                              }
                             if(seconds == (int) jSpinnerSecond.getValue()  && minutes == (int) jSpinnerMinute.getValue() && hours == (int) jSpinnerHour.getValue()){
                                 state = false;
@@ -747,7 +747,7 @@ public class Meja_4 extends javax.swing.JPanel implements ActionListener{
                             if( jam == 0 && menit <= 5){
                                jPanelDurasi.setBackground(Color.RED); 
                                //updateTransaksi5m();
-                               onOffLampu5m();
+                               //onOffLampu5m();
                              }
                             if(seconds == (int) jSpinnerSecond.getValue()  && minutes == (int) jSpinnerMinute.getValue() && hours == (int) jSpinnerHour.getValue()){
                                 state = false;
@@ -877,7 +877,7 @@ public class Meja_4 extends javax.swing.JPanel implements ActionListener{
                             if( jam == 0 && menit <= 5){
                                jPanelDurasi.setBackground(Color.RED); 
                                //updateTransaksi5m();
-                               onOffLampu5m();
+                               //onOffLampu5m();
                              }
                             if(seconds == (int) jSpinnerSecond.getValue()  && minutes == (int) jSpinnerMinute.getValue() && hours == (int) jSpinnerHour.getValue()){
                                 state = false;
