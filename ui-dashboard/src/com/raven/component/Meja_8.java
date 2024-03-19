@@ -65,6 +65,7 @@ public class Meja_8 extends javax.swing.JPanel implements ActionListener{
    
     String ddSecond, ddMinute, ddHour, ddJam, ddMenit, ddDetik;
     DecimalFormat ddFormat = new DecimalFormat("00");
+    byte[] ipServer={ (byte)192 , (byte)168 , (byte)1, (byte)112 };
     
     Timer timer;
     private Connection conn;
@@ -569,11 +570,10 @@ public class Meja_8 extends javax.swing.JPanel implements ActionListener{
                                 ddJam = ddFormat.format(jam);
                                 sisaHour.setText(ddJam + " : ");
                             }
-                            if( jam == 0 && menit <= 5){
+                            if( jam == 0 && menit == 5 && seconds == 60 && milliseconds == 100){
                                jPanelDurasi.setBackground(Color.RED); 
                                //updateTransaksi5m();
-                               //onOffLampu5m();
-
+                               onOffLampu5m();
                              }
                             if(seconds == (int) jSpinnerSecond.getValue()  && minutes == (int) jSpinnerMinute.getValue() && hours == (int) jSpinnerHour.getValue()){
                                 state = false;
@@ -587,7 +587,7 @@ public class Meja_8 extends javax.swing.JPanel implements ActionListener{
                                 jSpinnerHour.setValue(0);
                                 jSpinnerMinute.setValue(0);
                                 jSpinnerMinute.setValue(0);
-                                updateTransaksi();
+                                //updateTransaksi();
                                 offLampu();
 
                             }
@@ -657,10 +657,10 @@ public class Meja_8 extends javax.swing.JPanel implements ActionListener{
                                 ddJam = ddFormat.format(jam);
                                 sisaHour.setText(ddJam + " : ");
                             }
-                            if( jam == 0 && menit <= 5){
+                            if( jam == 0 && menit == 5 && seconds == 60 && milliseconds == 100){
                                jPanelDurasi.setBackground(Color.RED); 
                                //updateTransaksi5m();
-                               //onOffLampu5m();
+                               onOffLampu5m();
                              }
                             if(seconds == (int) jSpinnerSecond.getValue()  && minutes == (int) jSpinnerMinute.getValue() && hours == (int) jSpinnerHour.getValue()){
                                 state = false;
@@ -674,7 +674,7 @@ public class Meja_8 extends javax.swing.JPanel implements ActionListener{
                                 jSpinnerHour.setValue(0);
                                 jSpinnerMinute.setValue(0);
                                 jSpinnerMinute.setValue(0);
-                                updateTransaksi();
+                                //updateTransaksi();
                                 offLampu();
                             }
                             if(jam == 0 && menit == 00){
@@ -689,7 +689,7 @@ public class Meja_8 extends javax.swing.JPanel implements ActionListener{
                                 jSpinnerHour.setValue(0);
                                 jSpinnerMinute.setValue(0);
                                 jSpinnerMinute.setValue(0);
-                                updateTransaksi();
+                                //updateTransaksi();
                             }
                             
                         }
@@ -744,10 +744,10 @@ public class Meja_8 extends javax.swing.JPanel implements ActionListener{
                                 ddJam = ddFormat.format(jam);
                                 sisaHour.setText(ddJam + " : ");
                             }
-                            if( jam == 0 && menit <= 5){
+                            if( jam == 0 && menit == 5 && seconds == 60 && milliseconds == 100){
                                jPanelDurasi.setBackground(Color.RED); 
                                //updateTransaksi5m();
-                               //onOffLampu5m();
+                               onOffLampu5m();
                              }
                             if(seconds == (int) jSpinnerSecond.getValue()  && minutes == (int) jSpinnerMinute.getValue() && hours == (int) jSpinnerHour.getValue()){
                                 state = false;
@@ -761,7 +761,7 @@ public class Meja_8 extends javax.swing.JPanel implements ActionListener{
                                 jSpinnerHour.setValue(0);
                                 jSpinnerMinute.setValue(0);
                                 jSpinnerMinute.setValue(0);
-                                updateTransaksi();
+                                //updateTransaksi();
                                 offLampu();
                             }
                             if(jam == 0 && menit == 00){
@@ -874,10 +874,10 @@ public class Meja_8 extends javax.swing.JPanel implements ActionListener{
                                 ddJam = ddFormat.format(jam);
                                 sisaHour.setText(ddJam + " : ");
                             }
-                            if( jam == 0 && menit <= 5){
+                            if( jam == 0 && menit == 5 && seconds == 60 && milliseconds == 100){
                                jPanelDurasi.setBackground(Color.RED); 
                                //updateTransaksi5m();
-                               //onOffLampu5m();
+                               onOffLampu5m();
                              }
                             if(seconds == (int) jSpinnerSecond.getValue()  && minutes == (int) jSpinnerMinute.getValue() && hours == (int) jSpinnerHour.getValue()){
                                 state = false;
@@ -891,7 +891,7 @@ public class Meja_8 extends javax.swing.JPanel implements ActionListener{
                                 jSpinnerHour.setValue(0);
                                 jSpinnerMinute.setValue(0);
                                 jSpinnerMinute.setValue(0);
-                                updateTransaksi();
+                                //updateTransaksi();
                                 offLampu();
                             }
                             if(jam == 0 && menit == 00){
@@ -906,7 +906,7 @@ public class Meja_8 extends javax.swing.JPanel implements ActionListener{
                                 jSpinnerHour.setValue(0);
                                 jSpinnerMinute.setValue(0);
                                 jSpinnerMinute.setValue(0);
-                                updateTransaksi();
+                                //updateTransaksi();
                             }
                             
                         }
@@ -934,9 +934,9 @@ public class Meja_8 extends javax.swing.JPanel implements ActionListener{
         
     }//GEN-LAST:event_jButtonStartActionPerformed
     public void onLampu(){
-        byte[] ipServer={ (byte)192 , (byte)168 , (byte)1, (byte)112 };
-        Thread threadon = new Thread(){
-            public void run (){
+//        byte[] ipServer={ (byte)192 , (byte)168 , (byte)1, (byte)112 };
+//        Thread threadon = new Thread(){
+//            public void run (){
                 try {
                 Socket s=new Socket(InetAddress.getByAddress(ipServer),5000);
                 OutputStream sout = s.getOutputStream();
@@ -953,15 +953,15 @@ public class Meja_8 extends javax.swing.JPanel implements ActionListener{
                 } catch (Exception e) {
                     JOptionPane.showMessageDialog(null, "Tidak dapat mengirimkan data ke arduino");
                 }
-            }
-        };
-        threadon.start();
+//            }
+//        };
+//        threadon.start();
     }
     
     public void offLampu(){
-        byte[] ipServer={ (byte)192 , (byte)168 , (byte)1, (byte)112 };
-                                Thread threadoff = new Thread(){
-                                    public void run (){
+//        byte[] ipServer={ (byte)192 , (byte)168 , (byte)1, (byte)112 };
+//                                Thread threadoff = new Thread(){
+//                                    public void run (){
                                         try {
                                             Socket s=new Socket(InetAddress.getByAddress(ipServer),5000);
                                             OutputStream sout = s.getOutputStream();
@@ -978,15 +978,15 @@ public class Meja_8 extends javax.swing.JPanel implements ActionListener{
                                         } catch (Exception e) {
                                             JOptionPane.showMessageDialog(null, "Tidak dapat mengirimkan data ke arduino");
                                         }
-                                    }
-                                };
-                                threadoff.start();
+//                                    }
+//                                };
+//                                threadoff.start();
     }
     
     public void onOffLampu5m(){
-        byte[] ipServer={ (byte)192 , (byte)168 , (byte)1, (byte)112 };
-            Thread threadonoff = new Thread(){
-                public void run (){
+//        byte[] ipServer={ (byte)192 , (byte)168 , (byte)1, (byte)112 };
+//            Thread threadonoff = new Thread(){
+//                public void run (){
                     try {
                         Socket s=new Socket(InetAddress.getByAddress(ipServer),5000);
                         OutputStream sout = s.getOutputStream();
@@ -1003,9 +1003,9 @@ public class Meja_8 extends javax.swing.JPanel implements ActionListener{
                     } catch (Exception e) {
                         JOptionPane.showMessageDialog(null, "Tidak dapat mengirimkan data ke arduino");
                     }
-                }
-            };
-            threadonoff.start();
+//                }
+//            };
+//            threadonoff.start();
     }
     private void jButtonPauseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPauseActionPerformed
         state = false;      
