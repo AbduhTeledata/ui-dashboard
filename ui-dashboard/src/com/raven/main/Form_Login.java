@@ -220,8 +220,6 @@ public class Form_Login extends javax.swing.JFrame {
                 }
                 //JOptionPane.showMessageDialog(null, "Login Successfully");
                
-                
-            
             }
             else{
                 JOptionPane.showMessageDialog(null, "Username dan Password Salah");

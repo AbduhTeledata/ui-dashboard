@@ -158,6 +158,7 @@ public class Meja_1 extends javax.swing.JPanel implements ActionListener{
         jLabel1 = new javax.swing.JLabel();
         jLabelTanggal = new javax.swing.JLabel();
         jLabel_idorder = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(204, 204, 204));
 
@@ -405,6 +406,8 @@ public class Meja_1 extends javax.swing.JPanel implements ActionListener{
 
         jLabel_idorder.setText("id order");
 
+        jButton1.setText("Bayar");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -426,12 +429,16 @@ public class Meja_1 extends javax.swing.JPanel implements ActionListener{
                         .addComponent(jSpinnerMinute, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jSpinnerSecond, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel4)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jLabel_idorder)
-                                .addGap(13, 13, 13)))))
+                                .addGap(13, 13, 13))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jSpinnerSecond, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jButton1)
+                                .addGap(0, 0, Short.MAX_VALUE)))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addGap(5, 5, 5)
@@ -493,10 +500,12 @@ public class Meja_1 extends javax.swing.JPanel implements ActionListener{
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel_idorder)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jSpinnerHour, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jSpinnerMinute, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jSpinnerSecond, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jSpinnerHour, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jSpinnerMinute, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jSpinnerSecond, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jButton1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonStart)
@@ -509,6 +518,7 @@ public class Meja_1 extends javax.swing.JPanel implements ActionListener{
         jPanelDurasi.setBackground(Color.GRAY);
         jLabelTanggal.setVisible(false);
         jLabel_idorder.setVisible(false);
+        jButton1.setVisible(false);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonStartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonStartActionPerformed
@@ -571,7 +581,7 @@ public class Meja_1 extends javax.swing.JPanel implements ActionListener{
                             }
                             if( jam == 0 && menit <= 5){
                                jPanelDurasi.setBackground(Color.RED); 
-                               updateTransaksi5m();
+                               //updateTransaksi5m();
                                onOffLampu5m();
 
                              }
@@ -659,7 +669,7 @@ public class Meja_1 extends javax.swing.JPanel implements ActionListener{
                             }
                             if( jam == 0 && menit <= 5){
                                jPanelDurasi.setBackground(Color.RED); 
-                               updateTransaksi5m();
+                               //updateTransaksi5m();
                                onOffLampu5m();
                              }
                             if(seconds == (int) jSpinnerSecond.getValue()  && minutes == (int) jSpinnerMinute.getValue() && hours == (int) jSpinnerHour.getValue()){
@@ -746,7 +756,7 @@ public class Meja_1 extends javax.swing.JPanel implements ActionListener{
                             }
                             if( jam == 0 && menit <= 5){
                                jPanelDurasi.setBackground(Color.RED); 
-                               updateTransaksi5m();
+                               //updateTransaksi5m();
                                onOffLampu5m();
                              }
                             if(seconds == (int) jSpinnerSecond.getValue()  && minutes == (int) jSpinnerMinute.getValue() && hours == (int) jSpinnerHour.getValue()){
@@ -876,7 +886,7 @@ public class Meja_1 extends javax.swing.JPanel implements ActionListener{
                             }
                             if( jam == 0 && menit <= 5){
                                jPanelDurasi.setBackground(Color.RED); 
-                               updateTransaksi5m();
+                               //updateTransaksi5m();
                                onOffLampu5m();
                              }
                             if(seconds == (int) jSpinnerSecond.getValue()  && minutes == (int) jSpinnerMinute.getValue() && hours == (int) jSpinnerHour.getValue()){
@@ -1563,6 +1573,7 @@ public class Meja_1 extends javax.swing.JPanel implements ActionListener{
     private javax.swing.JLabel durasiMillisecond;
     private javax.swing.JLabel durasiMinute;
     private javax.swing.JLabel durasiSecond;
+    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButtonLanjutkan;
     private javax.swing.JButton jButtonPause;
     private javax.swing.JButton jButtonRefresh;
