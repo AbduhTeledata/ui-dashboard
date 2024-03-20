@@ -588,7 +588,7 @@ public class Meja_4 extends javax.swing.JPanel implements ActionListener{
                                 jSpinnerHour.setValue(0);
                                 jSpinnerMinute.setValue(0);
                                 jSpinnerMinute.setValue(0);
-                                updateTransaksi();
+                                //updateTransaksi();
                                 offLampu();
 
                             }
@@ -675,7 +675,7 @@ public class Meja_4 extends javax.swing.JPanel implements ActionListener{
                                 jSpinnerHour.setValue(0);
                                 jSpinnerMinute.setValue(0);
                                 jSpinnerMinute.setValue(0);
-                                updateTransaksi();
+                                //updateTransaksi();
                                 offLampu();
                             }
                             if(jam == 0 && menit == 00){
@@ -762,7 +762,7 @@ public class Meja_4 extends javax.swing.JPanel implements ActionListener{
                                 jSpinnerHour.setValue(0);
                                 jSpinnerMinute.setValue(0);
                                 jSpinnerMinute.setValue(0);
-                                updateTransaksi();
+                                //updateTransaksi();
                                 offLampu();
                             }
                             if(jam == 0 && menit == 00){
@@ -892,7 +892,7 @@ public class Meja_4 extends javax.swing.JPanel implements ActionListener{
                                 jSpinnerHour.setValue(0);
                                 jSpinnerMinute.setValue(0);
                                 jSpinnerMinute.setValue(0);
-                                updateTransaksi();
+                                //updateTransaksi();
                                 offLampu();
                             }
                             if(jam == 0 && menit == 00){
@@ -907,7 +907,7 @@ public class Meja_4 extends javax.swing.JPanel implements ActionListener{
                                 jSpinnerHour.setValue(0);
                                 jSpinnerMinute.setValue(0);
                                 jSpinnerMinute.setValue(0);
-                                updateTransaksi();
+                                //updateTransaksi();
                             }
                             
                         }

@@ -13,6 +13,7 @@ import java.awt.event.ItemEvent;
 import java.io.DataInputStream;
 import java.io.IOException;
 import java.io.OutputStream;
+import static java.lang.Thread.sleep;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.Inet4Address;
@@ -38,7 +39,9 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JSpinner;
 import javax.swing.SwingUtilities;
-import javax.swing.Timer;
+//import javax.swing.Timer;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class Meja_1 extends javax.swing.JPanel implements ActionListener{
     
@@ -60,6 +63,8 @@ public class Meja_1 extends javax.swing.JPanel implements ActionListener{
     int counter1 = 1, counter2 = 1, counter3 = 3;
     
     static boolean state = true;
+    int counter = 10;
+    Boolean isIt = false;
     
     public Connection connection;
     public Statement statement;
@@ -100,6 +105,7 @@ public class Meja_1 extends javax.swing.JPanel implements ActionListener{
         jButtonStart.addActionListener(this);
         jButtonLanjutkan.addActionListener(this);
         //getDataBiaya();
+      
     }
 
     public void setData(Model_Card data) {
@@ -332,7 +338,7 @@ public class Meja_1 extends javax.swing.JPanel implements ActionListener{
         jPanelDurasiLayout.setHorizontalGroup(
             jPanelDurasiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelDurasiLayout.createSequentialGroup()
-                .addContainerGap(12, Short.MAX_VALUE)
+                .addContainerGap(15, Short.MAX_VALUE)
                 .addGroup(jPanelDurasiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanelDurasiLayout.createSequentialGroup()
                         .addComponent(jLabel8)
@@ -531,8 +537,6 @@ public class Meja_1 extends javax.swing.JPanel implements ActionListener{
         menit = (int) jSpinnerMinute.getValue();
         jam = (int) jSpinnerHour.getValue();
         String lossReguler = jComboBoxCust.getSelectedItem().toString();
-        
-        
         //Integer biayapermenit = (int) biayamenit;
         Thread t = new Thread(){ 
             public void run(){
@@ -929,6 +933,7 @@ public class Meja_1 extends javax.swing.JPanel implements ActionListener{
                 }
             }
         };
+        //timer.start();
         t.start();
         //monitorThread(t);
         curDateTime();
@@ -1056,7 +1061,8 @@ public class Meja_1 extends javax.swing.JPanel implements ActionListener{
     }//GEN-LAST:event_jTextFieldDiskonActionPerformed
 
     private void jButtonRefreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRefreshActionPerformed
-        
+        //jButtonRefresh.addActionListener(this);
+        //timer.stop();
         state = false;
         jPanelDurasi.setBackground(Color.GRAY);
         jButtonStart.setEnabled(true);
@@ -1079,7 +1085,7 @@ public class Meja_1 extends javax.swing.JPanel implements ActionListener{
         durasiMillisecond.setText("00");
         sisaMillisecond.setText("00");
         jButtonStart.setEnabled(true);
-        //jButtonRefresh.addActionListener(this);
+        
         updateTransaksi();
         offLampu();
     }//GEN-LAST:event_jButtonRefreshActionPerformed
@@ -1551,6 +1557,7 @@ public class Meja_1 extends javax.swing.JPanel implements ActionListener{
         }
         if (evt.getSource() == jButtonRefresh) {
             System.out.println("clik button reset");
+           
         }
         if (evt.getSource() == jButtonLanjutkan) {
             System.out.println("Clik button lanjutkan");
@@ -1572,21 +1579,7 @@ public class Meja_1 extends javax.swing.JPanel implements ActionListener{
         super.paintComponent(grphcs);
     }
     
-    public static void monitorThread(Thread monitorMe) {
-
-        while(monitorMe.isAlive())
-         {
-         try{   
-           StackTraceElement[] threadStacktrace=monitorMe.getStackTrace();
-
-           System.out.println(monitorMe.getName() +" is Alive and it's state ="+monitorMe.getState()+" ||  Execution is in method : ("+threadStacktrace[0].getClassName()+"::"+threadStacktrace[0].getMethodName()+") @line"+threadStacktrace[0].getLineNumber());  
-
-               TimeUnit.MILLISECONDS.sleep(700);
-           }catch(Exception ex){}
-    /* since threadStacktrace may be empty upon reference since Thread A may be terminated after the monitorMe.getStackTrace(); call*/
-         }
-        System.out.println(monitorMe.getName()+" is dead and its state ="+monitorMe.getState());
-    }
+    
     
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
