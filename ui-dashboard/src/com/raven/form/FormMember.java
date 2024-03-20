@@ -284,7 +284,7 @@ public class FormMember extends javax.swing.JPanel {
                 }
             } 
             catch (Exception e) {
-                 JOptionPane.showMessageDialog(null, "Gagal get data Member");
+                 //JOptionPane.showMessageDialog(null, "Gagal get data Member");
                  System.out.println("Gagal get data member");
             }     
         }
