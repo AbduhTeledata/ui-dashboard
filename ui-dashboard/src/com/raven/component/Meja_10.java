@@ -933,7 +933,7 @@ public class Meja_10 extends javax.swing.JPanel implements ActionListener{
 
         
     }//GEN-LAST:event_jButtonStartActionPerformed
-     public void onLampu(){
+    public void onLampu(){
 //        byte[] ipServer={ (byte)192 , (byte)168 , (byte)1, (byte)111 };
 //        Thread threadon = new Thread(){
 //            public void run (){
@@ -958,8 +958,8 @@ public class Meja_10 extends javax.swing.JPanel implements ActionListener{
 //        threadon.start();
     }
      
-    public void offLampu(){
-        
+     public void offLampu(){
+//        byte[] ipServer={ (byte)192 , (byte)168 , (byte)1, (byte)111 };
 //                                Thread threadoff = new Thread(){
 //                                    public void run (){
                                         try {
@@ -967,11 +967,11 @@ public class Meja_10 extends javax.swing.JPanel implements ActionListener{
                                             OutputStream sout = s.getOutputStream();
                                             DataInputStream sin = new DataInputStream(s.getInputStream());
                                             DataInputStream keyboard = new DataInputStream(System.in);
-                                            String command = "lampu meja 4 OFF";
+                                            String command = "lampu meja 7 OFF";
                                             String response ;
                 
-                                            if (command.equals("lampu meja 4 OFF")){
-                                                sout.write("h".getBytes());
+                                            if (command.equals("lampu meja 7 OFF")){
+                                                sout.write("n".getBytes());
 //                                                response=sin.readLine();
 //                                                System.out.println(response);
                                             } 
