@@ -33,7 +33,7 @@ public class FormLaporan extends javax.swing.JPanel {
 //        dateChooser2.toDay();
         chDate.setTextField(txtDate);
         chDate.setDateSelectionMode(DateChooser.DateSelectionMode.BETWEEN_DATE_SELECTED);
-        chDate.setDateFormat(new SimpleDateFormat("YYY-MM-dd"));
+        chDate.setDateFormat(new SimpleDateFormat("YYYY-MM-dd"));
         model = (DefaultTableModel) jTableLaporan.getModel();
         chDate.addActionDateChooserListener(new DateChooserAdapter(){
             @Override
