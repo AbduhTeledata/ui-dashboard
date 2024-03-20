@@ -115,7 +115,7 @@ public class Meja_6 extends javax.swing.JPanel implements ActionListener{
     }
     
     public void curDate(){
-        DateTimeFormatter dtt = DateTimeFormatter.ofPattern("YYYY-MM-DD");
+        DateTimeFormatter dtt = DateTimeFormatter.ofPattern("YYYY-MM-dd");
         LocalDateTime now = LocalDateTime.now(); 
         jLabelTanggal.setText(dtt.format(now));
     }

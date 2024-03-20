@@ -114,7 +114,7 @@ byte[] ipServer={ (byte)192 , (byte)168 , (byte)1, (byte)111 };
     }
     
     public void curDate(){
-        DateTimeFormatter dtt = DateTimeFormatter.ofPattern("YYYY-MM-DD");
+        DateTimeFormatter dtt = DateTimeFormatter.ofPattern("YYYY-MM-dd");
         LocalDateTime now = LocalDateTime.now(); 
         jLabelTanggal.setText(dtt.format(now));
     }
