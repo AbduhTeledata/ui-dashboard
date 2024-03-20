@@ -1195,7 +1195,7 @@ public class Meja_1 extends javax.swing.JPanel implements ActionListener{
                 }
             } 
             catch (Exception e) {
-                 JOptionPane.showMessageDialog(null, "Gagal get data");
+                 //JOptionPane.showMessageDialog(null, "Gagal get data");
                  System.out.println("Gagal get data biaya");
             }     
         }
@@ -1234,11 +1234,11 @@ public class Meja_1 extends javax.swing.JPanel implements ActionListener{
                              "VALUES ('"+no_meja+"','"+jamMulai+"','"+jamSelesai+"','"+totalBiaya+"','"+durasi+"','"+member+"','"+diskon+"','"+statusOrder+"','"+statusBayar+"','"+tanggalOrder+"')";
 
                 st.execute(sql);
-                JOptionPane.showMessageDialog(null, "Data transaksi berhasil ditambahkan");
+                //JOptionPane.showMessageDialog(null, "Data transaksi berhasil ditambahkan");
                 connection.close();
 
                 } catch (Exception e) {
-                 JOptionPane.showMessageDialog(null, "Gagal tambah data transaksi");
+                 //JOptionPane.showMessageDialog(null, "Gagal tambah data transaksi");
                  
             }     
         }
@@ -1261,10 +1261,10 @@ public class Meja_1 extends javax.swing.JPanel implements ActionListener{
                 String sql = "UPDATE transaksi SET status_order='"+statusOrder+"' WHERE id_order='"+id_order+"' ";
                              
                 st.execute(sql);
-                JOptionPane.showMessageDialog(null, "Data transaksi berhasil diupdate");
+                //JOptionPane.showMessageDialog(null, "Data transaksi berhasil diupdate");
 
                 } catch (Exception e) {
-                 JOptionPane.showMessageDialog(null, "Gagal tambah data transaksi");
+                 //JOptionPane.showMessageDialog(null, "Gagal tambah data transaksi");
             }     
         }
     }
@@ -1288,11 +1288,11 @@ public class Meja_1 extends javax.swing.JPanel implements ActionListener{
                              
 
                 st.execute(sql);
-                JOptionPane.showMessageDialog(null, "Data transaksi berhasil diupdate");
+                //JOptionPane.showMessageDialog(null, "Data transaksi berhasil diupdate");
                 connection.close();
 
                 } catch (Exception e) {
-                 JOptionPane.showMessageDialog(null, "Gagal tambah data transaksi");
+                 //JOptionPane.showMessageDialog(null, "Gagal tambah data transaksi");
             }     
         }
     }
@@ -1326,7 +1326,7 @@ public class Meja_1 extends javax.swing.JPanel implements ActionListener{
                 }
             } 
             catch (Exception e) {
-                 JOptionPane.showMessageDialog(null, "Gagal get data");
+                 //JOptionPane.showMessageDialog(null, "Gagal get data");
                  System.out.println("Gagal get data");
             }     
         }
@@ -1372,7 +1372,7 @@ public class Meja_1 extends javax.swing.JPanel implements ActionListener{
                 }
             } 
             catch (Exception e) {
-                 JOptionPane.showMessageDialog(null, "Gagal get data");
+                 //JOptionPane.showMessageDialog(null, "Gagal get data");
                  System.out.println("Gagal get data biaya");
             }     
         }

@@ -952,7 +952,7 @@ byte[] ipServer={ (byte)192 , (byte)168 , (byte)1, (byte)111 };
 //                    System.out.println(response);
                 } 
                 } catch (Exception e) {
-                    JOptionPane.showMessageDialog(null, "Tidak dapat mengirimkan data ke arduino");
+                    //JOptionPane.showMessageDialog(null, "Tidak dapat mengirimkan data ke arduino");
                 }
 //            }
 //        };
@@ -977,7 +977,7 @@ byte[] ipServer={ (byte)192 , (byte)168 , (byte)1, (byte)111 };
 //                                                System.out.println(response);
                                             } 
                                         } catch (Exception e) {
-                                            JOptionPane.showMessageDialog(null, "Tidak dapat mengirimkan data ke arduino");
+                                            //JOptionPane.showMessageDialog(null, "Tidak dapat mengirimkan data ke arduino");
                                         }
 //                                    }
 //                                };
@@ -1002,7 +1002,7 @@ byte[] ipServer={ (byte)192 , (byte)168 , (byte)1, (byte)111 };
 //                            System.out.println(response);
                         } 
                     } catch (Exception e) {
-                        JOptionPane.showMessageDialog(null, "Tidak dapat mengirimkan data ke arduino");
+                        //JOptionPane.showMessageDialog(null, "Tidak dapat mengirimkan data ke arduino");
                     }
 //                }
 //            };
@@ -1174,7 +1174,7 @@ byte[] ipServer={ (byte)192 , (byte)168 , (byte)1, (byte)111 };
                 }
             } 
             catch (Exception e) {
-                 JOptionPane.showMessageDialog(null, "Gagal get data");
+                 //JOptionPane.showMessageDialog(null, "Gagal get data");
                  System.out.println("Gagal get data biaya");
             }     
         }
@@ -1213,11 +1213,11 @@ byte[] ipServer={ (byte)192 , (byte)168 , (byte)1, (byte)111 };
                              "VALUES ('"+no_meja+"','"+jamMulai+"','"+jamSelesai+"','"+totalBiaya+"','"+durasi+"','"+member+"','"+diskon+"','"+statusOrder+"','"+statusBayar+"','"+tanggalOrder+"')";
 
                 st.execute(sql);
-                JOptionPane.showMessageDialog(null, "Data transaksi berhasil ditambahkan");
+                //JOptionPane.showMessageDialog(null, "Data transaksi berhasil ditambahkan");
                 connection.close();
 
                 } catch (Exception e) {
-                 JOptionPane.showMessageDialog(null, "Gagal tambah data transaksi");
+                 //JOptionPane.showMessageDialog(null, "Gagal tambah data transaksi");
                  
             }     
         }
@@ -1240,10 +1240,10 @@ byte[] ipServer={ (byte)192 , (byte)168 , (byte)1, (byte)111 };
                 String sql = "UPDATE transaksi SET status_order='"+statusOrder+"' WHERE id_order='"+id_order+"' ";
                              
                 st.execute(sql);
-                JOptionPane.showMessageDialog(null, "Data transaksi berhasil diupdate");
+                //JOptionPane.showMessageDialog(null, "Data transaksi berhasil diupdate");
 
                 } catch (Exception e) {
-                 JOptionPane.showMessageDialog(null, "Gagal tambah data transaksi");
+                 //JOptionPane.showMessageDialog(null, "Gagal tambah data transaksi");
             }     
         }
     }
@@ -1267,11 +1267,11 @@ byte[] ipServer={ (byte)192 , (byte)168 , (byte)1, (byte)111 };
                              
 
                 st.execute(sql);
-                JOptionPane.showMessageDialog(null, "Data transaksi berhasil diupdate");
+                //JOptionPane.showMessageDialog(null, "Data transaksi berhasil diupdate");
                 connection.close();
 
                 } catch (Exception e) {
-                 JOptionPane.showMessageDialog(null, "Gagal tambah data transaksi");
+                 //JOptionPane.showMessageDialog(null, "Gagal tambah data transaksi");
             }     
         }
     }
@@ -1305,7 +1305,7 @@ byte[] ipServer={ (byte)192 , (byte)168 , (byte)1, (byte)111 };
                 }
             } 
             catch (Exception e) {
-                 JOptionPane.showMessageDialog(null, "Gagal get data");
+                 //JOptionPane.showMessageDialog(null, "Gagal get data");
                  System.out.println("Gagal get data");
             }     
         }
@@ -1351,7 +1351,7 @@ byte[] ipServer={ (byte)192 , (byte)168 , (byte)1, (byte)111 };
                 }
             } 
             catch (Exception e) {
-                 JOptionPane.showMessageDialog(null, "Gagal get data");
+                 //JOptionPane.showMessageDialog(null, "Gagal get data");
                  System.out.println("Gagal get data biaya");
             }     
         }

@@ -104,10 +104,10 @@ public class FormBiaya extends javax.swing.JPanel {
                 String sql = "UPDATE biaya SET harga='"+harga+"' WHERE nama_biaya='"+nama+"' ";
                              
                 st.execute(sql);
-                JOptionPane.showMessageDialog(null, "Data harga berhasil diupdate");
+                //JOptionPane.showMessageDialog(null, "Data harga berhasil diupdate");
 
                 } catch (Exception e) {
-                 JOptionPane.showMessageDialog(null, "Gagal update data harga");
+                 //JOptionPane.showMessageDialog(null, "Gagal update data harga");
             }     
         }
     }
@@ -130,11 +130,11 @@ public class FormBiaya extends javax.swing.JPanel {
                              "VALUES ('"+nama+"','"+harga+"')";
 
                 st.execute(sql);
-                JOptionPane.showMessageDialog(null, "Data Harga berhasil ditambahkan");
+                //JOptionPane.showMessageDialog(null, "Data Harga berhasil ditambahkan");
                 //getDataBiaya();
 
                 } catch (Exception e) {
-                 JOptionPane.showMessageDialog(null, "Gagal tambah data Harga");
+                 //JOptionPane.showMessageDialog(null, "Gagal tambah data Harga");
                  
             }     
         }
@@ -313,13 +313,13 @@ public class FormBiaya extends javax.swing.JPanel {
                 String sql = "UPDATE biaya SET harga='"+harga+"' WHERE nama_biaya='"+nama+"' ";
                              
                 st.execute(sql);
-                JOptionPane.showMessageDialog(null, "Data harga berhasil diupdate");
+                //JOptionPane.showMessageDialog(null, "Data harga berhasil diupdate");
                 table_update();
                 jNamaBiaya.setText("");
                 jHarga.setText("");
 
                 } catch (Exception e) {
-                 JOptionPane.showMessageDialog(null, "Gagal update data harga");
+                // JOptionPane.showMessageDialog(null, "Gagal update data harga");
             }     
 //        }
         table_update();

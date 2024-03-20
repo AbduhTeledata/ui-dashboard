@@ -370,12 +370,12 @@ public class FormUser extends javax.swing.JPanel {
                              "VALUES ('"+nama+"','"+username+"','"+password+"','"+telp+"','"+alamat+"','"+level+"')";
 
                 st.execute(sql);
-                JOptionPane.showMessageDialog(null, "Data user berhasil ditambahkan");
+                //JOptionPane.showMessageDialog(null, "Data user berhasil ditambahkan");
                 //getDataBiaya();
                 table_update();
 
                 } catch (Exception e) {
-                 JOptionPane.showMessageDialog(null, "Gagal tambah data user");
+                 //JOptionPane.showMessageDialog(null, "Gagal tambah data user");
                  
             }     
         }
@@ -406,7 +406,7 @@ public class FormUser extends javax.swing.JPanel {
                         "WHERE id_pengguna='"+id+"' ";
 
                 st.execute(sql);
-                JOptionPane.showMessageDialog(null, "Data user berhasil diupdate");
+                //JOptionPane.showMessageDialog(null, "Data user berhasil diupdate");
                 table_update();
                 txt_nama.setText("");
                 txt_username.setText("");
@@ -415,7 +415,7 @@ public class FormUser extends javax.swing.JPanel {
                 txt_alamat.setText("");
 
             } catch (Exception e) {
-                JOptionPane.showMessageDialog(null, "Gagal update data user");
+                //JOptionPane.showMessageDialog(null, "Gagal update data user");
             }
     }//GEN-LAST:event_btn_editActionPerformed
 
@@ -443,7 +443,7 @@ public class FormUser extends javax.swing.JPanel {
                 String sql = "DELETE  FROM pengguna WHERE id_pengguna='"+id+"' ";
 
                 st.execute(sql);
-                JOptionPane.showMessageDialog(null, "Data user berhasil di hapus");
+                //JOptionPane.showMessageDialog(null, "Data user berhasil di hapus");
                 table_update();
                 txt_nama.setText("");
                 txt_username.setText("");

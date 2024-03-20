@@ -12,11 +12,16 @@ import com.raven.form.FormHome;
 import com.raven.form.FormBiaya;
 import com.raven.form.FormUser;
 import com.raven.form.JDialogMember;
+import static com.raven.main.Menu_Utama.showOnScreen;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.GradientPaint;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.GraphicsDevice;
+import java.awt.GraphicsEnvironment;
 import java.awt.RenderingHints;
+import java.awt.Toolkit;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -48,7 +53,8 @@ public class Menu_Utama1 extends javax.swing.JFrame {
         //this.setExtendedState(JFrame.MAXIMIZED_BOTH);
         //setBackground(new Color(0, 0, 0, 0));
         //setUndecorated(false);
-        
+        Dimension dim= Toolkit.getDefaultToolkit().getScreenSize();
+        showOnScreen(1, this);
         //formHome = new FormHome();
         formMember = new FormMember();
         formMakanan = new FormMakanan();
@@ -90,7 +96,20 @@ public class Menu_Utama1 extends javax.swing.JFrame {
         mainPanel.repaint();
         mainPanel.revalidate();
     }
-
+    public static void showOnScreen( int screen, JFrame frame ){
+        GraphicsEnvironment ge = GraphicsEnvironment
+        .getLocalGraphicsEnvironment();
+        GraphicsDevice[] gs = ge.getScreenDevices();
+        if( screen > -1 && screen < gs.length ){
+        gs[screen].setFullScreenWindow( frame );
+        }
+        else if( gs.length > 0 ){
+        gs[0].setFullScreenWindow( frame );
+        }
+        else{
+        throw new RuntimeException( "No Screens Found" );
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

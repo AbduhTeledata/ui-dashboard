@@ -209,12 +209,12 @@ public class FormMember extends javax.swing.JPanel {
                              "VALUES ('"+nama+"','"+alamat+"','"+telp+"','"+email+"')";
 
                 st.execute(sql);
-                JOptionPane.showMessageDialog(null, "Data Member berhasil ditambahkan");
+                //JOptionPane.showMessageDialog(null, "Data Member berhasil ditambahkan");
                 //getDataBiaya();
                 table_update();
 
                 } catch (Exception e) {
-                 JOptionPane.showMessageDialog(null, "Gagal tambah data member");
+                 //JOptionPane.showMessageDialog(null, "Gagal tambah data member");
                  
             }     
         }
@@ -313,7 +313,7 @@ public class FormMember extends javax.swing.JPanel {
                         "WHERE id_member='"+id+"' ";
 
                 st.execute(sql);
-                JOptionPane.showMessageDialog(null, "Data member berhasil diupdate");
+                //JOptionPane.showMessageDialog(null, "Data member berhasil diupdate");
                 table_update();
                 jTxtNama.setText("");
                 jTxtAlamat.setText("");
@@ -321,7 +321,7 @@ public class FormMember extends javax.swing.JPanel {
                 jTxtEmail.setText("");
 
             } catch (Exception e) {
-                JOptionPane.showMessageDialog(null, "Gagal update data member");
+                //JOptionPane.showMessageDialog(null, "Gagal update data member");
             }
             //        }
         //table_update();
@@ -359,7 +359,7 @@ public class FormMember extends javax.swing.JPanel {
                 String sql = "DELETE  FROM member WHERE id_member='"+id+"' ";
 
                 st.execute(sql);
-                JOptionPane.showMessageDialog(null, "Data member berhasil dihapus");
+                //JOptionPane.showMessageDialog(null, "Data member berhasil dihapus");
                 table_update();
                 jTxtNama.setText("");
                 jTxtAlamat.setText("");
@@ -367,7 +367,7 @@ public class FormMember extends javax.swing.JPanel {
                 jTxtEmail.setText("");
 
             } catch (Exception e) {
-                JOptionPane.showMessageDialog(null, "Gagal hapus data member");
+                //JOptionPane.showMessageDialog(null, "Gagal hapus data member");
             }
     }//GEN-LAST:event_btn_hapusActionPerformed
 
