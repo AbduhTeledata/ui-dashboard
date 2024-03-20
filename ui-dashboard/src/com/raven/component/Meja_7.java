@@ -959,7 +959,7 @@ public class Meja_7 extends javax.swing.JPanel implements ActionListener{
     }
     
     public void offLampu(){
-//        byte[] ipServer={ (byte)192 , (byte)168 , (byte)1, (byte)112 };
+        
 //                                Thread threadoff = new Thread(){
 //                                    public void run (){
                                         try {
@@ -967,10 +967,10 @@ public class Meja_7 extends javax.swing.JPanel implements ActionListener{
                                             OutputStream sout = s.getOutputStream();
                                             DataInputStream sin = new DataInputStream(s.getInputStream());
                                             DataInputStream keyboard = new DataInputStream(System.in);
-                                            String command = "lampu meja 7 OFF";
+                                            String command = "lampu meja 4 OFF";
                                             String response ;
                 
-                                            if (command.equals("lampu meja 9 OFF")){
+                                            if (command.equals("lampu meja 4 OFF")){
                                                 sout.write("h".getBytes());
 //                                                response=sin.readLine();
 //                                                System.out.println(response);
@@ -982,6 +982,30 @@ public class Meja_7 extends javax.swing.JPanel implements ActionListener{
 //                                };
 //                                threadoff.start();
     }
+//    public void offLampu(){
+//        byte[] ipServer={ (byte)192 , (byte)168 , (byte)1, (byte)112 };
+//                                Thread threadoff = new Thread(){
+//                                    public void run (){
+//                                        try {
+//                                            Socket s=new Socket(InetAddress.getByAddress(ipServer),5000);
+//                                            OutputStream sout = s.getOutputStream();
+//                                            DataInputStream sin = new DataInputStream(s.getInputStream());
+//                                            DataInputStream keyboard = new DataInputStream(System.in);
+//                                            String command = "lampu meja 7 OFF";
+//                                            String response ;
+//                
+//                                            if (command.equals("lampu meja 9 OFF")){
+//                                                sout.write("h".getBytes());
+////                                                response=sin.readLine();
+////                                                System.out.println(response);
+//                                            } 
+//                                        } catch (Exception e) {
+//                                            JOptionPane.showMessageDialog(null, "Tidak dapat mengirimkan data ke arduino");
+//                                        }
+////                                    }
+////                                };
+////                                threadoff.start();
+////    }
     
     public void onOffLampu5m(){
 //        byte[] ipServer={ (byte)192 , (byte)168 , (byte)1, (byte)112 };
@@ -1065,7 +1089,7 @@ public class Meja_7 extends javax.swing.JPanel implements ActionListener{
         jButtonStart.setEnabled(true);
         //jButtonRefresh.addActionListener(this);
         updateTransaksi();
-       offLampu();
+        offLampu();
     }//GEN-LAST:event_jButtonRefreshActionPerformed
 
     private void jComboBoxCustActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxCustActionPerformed
