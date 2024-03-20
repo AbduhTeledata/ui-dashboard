@@ -33,12 +33,12 @@ public class FormLaporan extends javax.swing.JPanel {
 //        dateChooser2.toDay();
         chDate.setTextField(txtDate);
         chDate.setDateSelectionMode(DateChooser.DateSelectionMode.BETWEEN_DATE_SELECTED);
-        chDate.setDateFormat(new SimpleDateFormat("YYYY-MM-dd"));
+        chDate.setDateFormat(new SimpleDateFormat("yyyy-MM-dd"));
         model = (DefaultTableModel) jTableLaporan.getModel();
         chDate.addActionDateChooserListener(new DateChooserAdapter(){
             @Override
             public void dateBetweenChanged(DateBetween date, DateChooserAction action ){
-                SimpleDateFormat df = new SimpleDateFormat("YYYY-MM-dd");
+                SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
                 String dateFrom = df.format(date.getFromDate());
                 String toDate = df.format(date.getToDate());
                 loadData("SELECT * FROM transaksi WHERE tanggal_order BETWEEN '"+dateFrom+"' AND '"+toDate+"'");
