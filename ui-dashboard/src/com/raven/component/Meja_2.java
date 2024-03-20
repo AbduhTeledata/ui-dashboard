@@ -1066,7 +1066,7 @@ byte[] ipServer={ (byte)192 , (byte)168 , (byte)1, (byte)111 };
         jButtonStart.setEnabled(true);
         //jButtonRefresh.addActionListener(this);
         updateTransaksi();
-       offLampu();
+        offLampu();
     }//GEN-LAST:event_jButtonRefreshActionPerformed
 
     private void jComboBoxCustActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxCustActionPerformed

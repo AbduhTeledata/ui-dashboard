@@ -1088,7 +1088,7 @@ public class Meja_7 extends javax.swing.JPanel implements ActionListener{
         sisaMillisecond.setText("00");
         jButtonStart.setEnabled(true);
         //jButtonRefresh.addActionListener(this);
-        updateTransaksi();
+        //updateTransaksi();
         offLampu();
     }//GEN-LAST:event_jButtonRefreshActionPerformed
 
