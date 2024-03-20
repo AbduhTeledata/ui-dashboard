@@ -115,7 +115,7 @@ public class Meja_4 extends javax.swing.JPanel implements ActionListener{
     }
     
     public void curDate(){
-        DateTimeFormatter dtt = DateTimeFormatter.ofPattern("dd-MM-YYY");
+        DateTimeFormatter dtt = DateTimeFormatter.ofPattern("YYYY-MM-DD");
         LocalDateTime now = LocalDateTime.now(); 
         jLabelTanggal.setText(dtt.format(now));
     }
@@ -977,7 +977,7 @@ public class Meja_4 extends javax.swing.JPanel implements ActionListener{
 //                                                System.out.println(response);
                                             } 
                                         } catch (Exception e) {
-                                            //JOptionPane.showMessageDialog(null, "Tidak dapat mengirimkan data ke arduino");
+                                            JOptionPane.showMessageDialog(null, "Koneksi Lambat Silahkan tunggu beberapa saat");
                                         }
 //                                    }
 //                                };
@@ -1002,7 +1002,7 @@ public class Meja_4 extends javax.swing.JPanel implements ActionListener{
 //                            System.out.println(response);
                         } 
                     } catch (Exception e) {
-                        //JOptionPane.showMessageDialog(null, "Tidak dapat mengirimkan data ke arduino");
+                        JOptionPane.showMessageDialog(null, "Koneksi Lambat Silahkan tunggu beberapa saat");
                     }
 //                }
 //            };

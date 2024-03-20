@@ -51,8 +51,8 @@ public class Menu_Utama extends javax.swing.JFrame {
         //this.setExtendedState(JFrame.MAXIMIZED_BOTH);
         //setBackground(new Color(0, 0, 0, 0));
         //setUndecorated(false);
-        Dimension dim= Toolkit.getDefaultToolkit().getScreenSize();
-        showOnScreen(1, this);
+//        Dimension dim= Toolkit.getDefaultToolkit().getScreenSize();
+//        showOnScreen(1, this);
         formHome = new FormHome();
         formMember = new FormMember();
         formMakanan = new FormMakanan();

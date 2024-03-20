@@ -114,7 +114,7 @@ byte[] ipServer={ (byte)192 , (byte)168 , (byte)1, (byte)111 };
     }
     
     public void curDate(){
-        DateTimeFormatter dtt = DateTimeFormatter.ofPattern("dd-MM-YYY");
+        DateTimeFormatter dtt = DateTimeFormatter.ofPattern("YYYY-MM-DD");
         LocalDateTime now = LocalDateTime.now(); 
         jLabelTanggal.setText(dtt.format(now));
     }
@@ -952,7 +952,7 @@ byte[] ipServer={ (byte)192 , (byte)168 , (byte)1, (byte)111 };
 //                    System.out.println(response);
                 } 
                 } catch (Exception e) {
-                    //JOptionPane.showMessageDialog(null, "Tidak dapat mengirimkan data ke arduino");
+                    JOptionPane.showMessageDialog(null, "Koneksi Lambat Silahkan close aplikasi");
                 }
 //            }
 //        };
@@ -977,7 +977,7 @@ byte[] ipServer={ (byte)192 , (byte)168 , (byte)1, (byte)111 };
 //                                                System.out.println(response);
                                             } 
                                         } catch (Exception e) {
-                                            //JOptionPane.showMessageDialog(null, "Tidak dapat mengirimkan data ke arduino");
+                                            JOptionPane.showMessageDialog(null, "Koneksi Lambat Silahkan tunggu beberapa saat");
                                         }
 //                                    }
 //                                };
@@ -1002,7 +1002,7 @@ byte[] ipServer={ (byte)192 , (byte)168 , (byte)1, (byte)111 };
 //                            System.out.println(response);
                         } 
                     } catch (Exception e) {
-                        //JOptionPane.showMessageDialog(null, "Tidak dapat mengirimkan data ke arduino");
+                        JOptionPane.showMessageDialog(null, "Koneksi Lambat Silahkan tunggu beberapa saat");
                     }
 //                }
 //            };
